@@ -80,7 +80,22 @@ Diagram automatically created at [DBDiagram](https://dbdiagram.io/home) promptin
 
 ## ☕︎ Backend Implementation
 
+The backend is a RESTful API designed with Java Spring Boot version 3.4.5.
+
 ### Dependencies
+
+| DEPENDENCY | PURPOSE |
+| :--- | :--- |
+| Spring Web | REST API developement |
+| Spring Boot DevTools | Developement tools (helps avoiding console) |
+| Lombok | Reduced boilerplate code |
+| Spring Data JPA | Database access and persistance |
+| MySQL Driver | Connection with database |
+| Spring Security | Authentication and authorization |
+| Validation | Request different validations easily |
+| Java Mail Sender | Email notifications |
+| Spring Session | Session management |
+| Springdoc OpenAPI | API documentation (Swagger) |
 
 ### Configuration
 
