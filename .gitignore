@@ -1,0 +1,8 @@
+# Backend/application.properties
+/Back_SpringBoot/TappedOut/src/main/resources/application.properties
+
+# Logs folder and all files
+/Logs/
+
+# Uploaded files
+/Uploaded_files/
