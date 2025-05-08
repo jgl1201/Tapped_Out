@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umlet_diagram>
+<zoom_level>10</zoom_level>
+<element>
+<id>UMLActor</id>
+<coordinates>
+<x>30</x>
+<y>30</y>
+<w>120</w>
+<h>60</h>
+</coordinates>
+<panel_attributes>Guest</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLActor</id>
+<coordinates>
+<x>30</x>
+<y>150</y>
+<w>120</w>
+<h>60</h>
+</coordinates>
+<panel_attributes>User</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLActor</id>
+<coordinates>
+<x>30</x>
+<y>270</y>
+<w>120</w>
+<h>60</h>
+</coordinates>
+<panel_attributes>Organizer</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLActor</id>
+<coordinates>
+<x>30</x>
+<y>390</y>
+<w>120</w>
+<h>60</h>
+</coordinates>
+<panel_attributes>Admin</panel_attributes>
+<additional_attributes/>
+</element>
+<!-- Use Cases -->
+<element>
+<id>UMLUseCase</id>
+<coordinates><x>300</x><y>30</y><w>160</w><h>40</h></coordinates>
+<panel_attributes>Ver lista de eventos</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLUseCase</id>
+<coordinates><x>300</x><y>90</y><w>160</w><h>40</h></coordinates>
+<panel_attributes>Ver detalle de evento</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLUseCase</id>
+<coordinates><x>300</x><y>150</y><w>160</w><h>40</h></coordinates>
+<panel_attributes>Buscar eventos</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLUseCase</id>
+<coordinates><x>300</x><y>210</y><w>160</w><h>40</h></coordinates>
+<panel_attributes>Registrarse / Iniciar sesión</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLUseCase</id>
+<coordinates><x>300</x><y>270</y><w>160</w><h>40</h></coordinates>
+<panel_attributes>Inscribirse a evento</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLUseCase</id>
+<coordinates><x>300</x><y>330</y><w>160</w><h>40</h></coordinates>
+<panel_attributes>Pagar inscripción</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLUseCase</id>
+<coordinates><x>300</x><y>390</y><w>160</w><h>40</h></coordinates>
+<panel_attributes>Ver eventos inscritos</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLUseCase</id>
+<coordinates><x>300</x><y>450</y><w>160</w><h>40</h></coordinates>
+<panel_attributes>Crear evento</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLUseCase</id>
+<coordinates><x>300</x><y>510</y><w>180</w><h>40</h></coordinates>
+<panel_attributes>Editar / Cancelar evento</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLUseCase</id>
+<coordinates><x>300</x><y>570</y><w>160</w><h>40</h></coordinates>
+<panel_attributes>Gestionar usuarios</panel_attributes>
+<additional_attributes/>
+</element>
+<element>
+<id>UMLUseCase</id>
+<coordinates><x>300</x><y>630</y><w>160</w><h>40</h></coordinates>
+<panel_attributes>Gestionar eventos</panel_attributes>
+<additional_attributes/>
+</element>
+</umlet_diagram>
