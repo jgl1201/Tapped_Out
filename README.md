@@ -24,8 +24,6 @@
 
 - [Getting Started](#getting-started)
 
-- [License](#license)
-
 ## 🔎 Project Overview
 
 Tapped Out is a comprehensive platform for organizing combat sports events. The system provides:
@@ -54,6 +52,8 @@ The database is designed to support complex event management with multiple sport
 
 ### Diagrams
 
+#### ER Diagram
+
 The following are Entity-Relation Diagrams showing the relations between tables.
 
 Diagram manually created at [UMLetino](https://www.umletino.com/umletino.html)
@@ -63,6 +63,14 @@ Diagram manually created at [UMLetino](https://www.umletino.com/umletino.html)
 Diagram automatically created at [DBDiagram](https://dbdiagram.io/home) prompting the database creation script.
 
 ![ER Diagram](Diagrams/TappedOut_ER-Diagram.png)
+
+#### Use Case Diagram
+
+The following is an Use-Case Diagram showing the uses an user can give to the platform, making distictions between the types of users.
+
+Diagram created at [UMLetino](https://www.umletino.com/umletino.html)
+
+![Use Case Diagram](Diagrams/TappedOut_Use-Case-Diagram.png)
 
 ### Key Tables
 
@@ -104,7 +112,6 @@ The backend is a RESTful API designed with Java Spring Boot version 3.4.5.
 Change lines with the data you need for your project (email token, db user and password...)
 
 ```properties
-
 spring.application.name=TappedOut
 
 #=================
@@ -160,7 +167,6 @@ springdoc.api-docs.path=/api-docs
 springdoc.swagger-ui.path=/swagger-ui.html
 springdoc.swagger-ui.tagsSorter=alpha
 springdoc.swagger-ui.operationsSorter=alpha
-
 ```
 
 #### logback-spring.xml
@@ -174,7 +180,6 @@ Logback is a Spring Boot integrated dependency that allows to track logs made at
 The following is a configuration where logs are stored ad `../../../Logs` with daily rotation (creates 1 log file / day):
 
 ```xml
-
 <configuration>
 
     <property name="LOG_PATH" value="../../../Logs"/>
@@ -190,7 +195,7 @@ The following is a configuration where logs are stored ad `../../../Logs` with d
         </encoder>
     </appender>
 
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender"> 
         <encoder>
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
@@ -202,11 +207,25 @@ The following is a configuration where logs are stored ad `../../../Logs` with d
     </root>
 
 </configuration>
+```
 
+#### Models
+
+Map the MySQL tables to Java classes, using notations.
+
+#### Repositories
+
+Create the repository for each of the models extending from `JpaRepository`.
+
+```diff
+- JPA / HQL references the Entity, not the table. This applies to porperties too.
+
+! Is a good coding practice to access properties id's by adding .id. For example
++ @Query("... c.levelId.id")
+! Instead of:
++ @Query("... c.levelId")
 ```
 
 ## ⚛ Frontend Implementation
 
 ## Getting Started
-
-## License
