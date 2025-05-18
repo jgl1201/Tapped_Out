@@ -1,0 +1,146 @@
+<diagram program="umletino" version="15.1"><zoom_level>7</zoom_level><help_text></help_text><element><id>UMLClass</id><coordinates><x>476</x><y>273</y><w>84</w><h>77</h></coordinates><panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+EventStatus
+--
+~ PLANNED
+~ ON GOING
+~ COMPLETED
+~ CANCELLED</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>35</x><y>350</y><w>84</w><h>70</h></coordinates><panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+PaymentStatus
+--
+~ PENDING
+~ PAID
+~ CANCELLED</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>483</x><y>49</y><w>70</w><h>42</h></coordinates><panel_attributes>UserType
+--
+- id: number
+- name: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>350</x><y>28</y><w>105</w><h>182</h></coordinates><panel_attributes>User
+--
+- id: number
+- dni: String
+- typeId: UserType
+- email: Strign
+- passwordHash: String
+- firstName: String
+- lastName: String
+- dateOfBirth: Date
+- genderId: Gender
+- country: Strign
+- city: String
+- phone: number
+- avatar: String
+- isVerified: boolean
+- createdAt: Date</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>448</x><y>63</y><w>49</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>42</x><y>35</y><w>70</w><h>56</h></coordinates><panel_attributes>SportLevel
+--
+- id: number
+- sportId: Sport
+- name: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>42</x><y>119</y><w>70</w><h>49</h></coordinates><panel_attributes>Sport
+--
+- id: number
+- name: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>21</x><y>63</y><w>35</w><h>91</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>30;110;10;110;10;10;30;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>140</x><y>224</y><w>105</w><h>91</h></coordinates><panel_attributes>Result
+--
+- id: number
+- eventId: Event
+- categoryId: Category
+- competitorId: User
+- position: number
+- notes: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>147</x><y>329</y><w>140</w><h>91</h></coordinates><panel_attributes>Inscription
+--
+- id: number
+- competitorId: User
+- eventId: Event
+- categoryId: Category
+- registerDate: Date
+- paymentStatus: PaymentStatus</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>42</x><y>224</y><w>70</w><h>42</h></coordinates><panel_attributes>Gender
+--
+- id: number
+- name: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>140</x><y>168</y><w>105</w><h>42</h></coordinates><panel_attributes>EventCategory
+--
+- eventId: Event
+- categoryId: Category</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>343</x><y>231</y><w>112</w><h>175</h></coordinates><panel_attributes>Event
+--
+- id: number
+- sportId: Sport
+- organizerId: User
+- name: String
+- description: String
+- startDate: Date
+- endDate: Date
+- status: EventStatus
+- country: String
+- city: String
+- address: String
+- logo: String
+- createdAt: String
+- registrationFee: number</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>140</x><y>35</y><w>105</w><h>119</h></coordinates><panel_attributes>Category
+--
+- id: number
+- sportId: Sport
+- name: Strign
+- minAge: number
+- maxAge: number
+- minWeight: number
+- maxWeight: number
+- genderId: Gender
+- levelId: SportLevel</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>14</x><y>126</y><w>140</w><h>133</h></coordinates><panel_attributes>lt=&lt;&lt;-
+fg=red</panel_attributes><additional_attributes>40;170;10;170;10;70;170;70;170;10;180;10</additional_attributes></element><element><id>Relation</id><coordinates><x>105</x><y>21</y><w>259</w><h>238</h></coordinates><panel_attributes>lt=&lt;&lt;-
+fg=red</panel_attributes><additional_attributes>10;320;30;320;30;10;330;10;330;160;350;160</additional_attributes></element><element><id>Relation</id><coordinates><x>21</x><y>63</y><w>133</w><h>56</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;60;140;60;170;10</additional_attributes></element><element><id>Relation</id><coordinates><x>21</x><y>7</y><w>133</w><h>147</h></coordinates><panel_attributes>lt=&lt;&lt;-
+fg=green</panel_attributes><additional_attributes>30;70;10;70;10;10;140;10;140;190;170;190</additional_attributes></element><element><id>Relation</id><coordinates><x>238</x><y>182</y><w>119</w><h>84</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>150;100;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>238</x><y>49</y><w>35</w><h>168</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;30;10;30;220;10;220</additional_attributes></element><element><id>Relation</id><coordinates><x>238</x><y>245</y><w>119</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>150;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>238</x><y>49</y><w>49</w><h>231</h></coordinates><panel_attributes>lt=&lt;&lt;-
+fg=blue</panel_attributes><additional_attributes>10;10;50;120;50;310;10;310</additional_attributes></element><element><id>Relation</id><coordinates><x>238</x><y>42</y><w>126</w><h>252</h></coordinates><panel_attributes>lt=&lt;&lt;-
+fg=pink</panel_attributes><additional_attributes>160;10;30;260;10;340</additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>42</y><w>84</w><h>329</h></coordinates><panel_attributes>lt=&lt;&lt;-
+fg=pink</panel_attributes><additional_attributes>100;10;30;40;20;450;10;450</additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>245</y><w>77</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;180</additional_attributes></element><element><id>Relation</id><coordinates><x>238</x><y>49</y><w>98</w><h>343</h></coordinates><panel_attributes>lt=&lt;&lt;-
+fg=red</panel_attributes><additional_attributes>10;10;120;10;120;470;70;470</additional_attributes></element><element><id>Relation</id><coordinates><x>112</x><y>399</y><w>49</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>448</x><y>322</y><w>42</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>40;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>448</x><y>28</y><w>175</w><h>266</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;30;70;10;230;10;230;290;40;290;10;360</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>0</y><w>637</w><h>441</h></coordinates><panel_attributes>Class Diagram for Models</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>658</x><y>0</y><w>574</w><h>441</h></coordinates><panel_attributes>Class Diagram for Services</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>672</x><y>21</y><w>189</w><h>105</h></coordinates><panel_attributes>UserService
+--
++ existsByDni (dni: string): boolean
++ existsByEmail( email: String): boolean
++ findByDni (dni: String): User
++ findByEmail (email: String): User
++ findByType (type: UserType): List&lt;User&gt;
++ findByGender (gender: Gender): List&lt;User&gt;
++ findbyLocation (location: String) List&lt;User&gt;
++ searchUsers (query: String): List&lt;User&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>672</x><y>133</y><w>231</w><h>140</h></coordinates><panel_attributes>EventService
+--
++ findBySport (sport: Sport): List&lt;Event&gt;
++ findByOrganizer (organizer: User): List&lt;Event&gt;
++ findByStatus (status: EventStatus): List&lt;Event&gt;
++ findByLocation (location: String): List&lt;Event&gt;
++ findUpcomingEvents: List&lt;Event&gt;
++ findPastEvents(): List&lt;Event&gt;
++ searchEvents (
+          sport: Sport,
+          country: String,
+          city: String,
+          query: String): List&lt;Event&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>672</x><y>280</y><w>189</w><h>133</h></coordinates><panel_attributes>CategoryService
+--
++ findBySport (sport: Sport): List&lt;Category&gt;
++ findByGender (gender: Gender): List&lt;Category&gt;
++ findByLevel (level: Sportlevel): List&lt;Category&gt;
++ findBySportAndname (sport: Sport, name: String): List&lt;Category&gt;
++ findMatchingCategories (
+          sport: Sport, gender: Gender,
+          level: SportLevel,
+          minAge: number, maxAge: number,
+          minWeight: number, MaxWeight: number
+): List&lt;Category&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>889</x><y>21</y><w>336</w><h>105</h></coordinates><panel_attributes>InscriptionService
+--
++ findByCompetitor(competitor: User): List&lt;Inscription&gt;
++ findByEvent(event: Event): List&lt;Inscription&gt;
++ findByCategory(category: Category): List&lt;Inscription&gt;
++ findByPaymentStatus(status: PaymentStatus): List&lt;Inscription&gt;
++ findPaidInscriptionsByEvent(eventId: number): List&lt;Inscription&gt;
++ countPaidInscriptionsByEvent(eventId: number): number
++ findByCompetitorAndEvent(userId: number, eventId: number): List&lt;Inscription&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>910</x><y>133</y><w>308</w><h>84</h></coordinates><panel_attributes>ResultService
+--
++ findByEvent(event: Event): List&lt;Result&gt;
++ findByCategory(category: Category): List&lt;Result&gt;
++ findbyCompetitor (competitor: User): List&lt;Result&gt;
++ findByEventAndCategory (event: Event, category: Category): List&lt;Result&gt;
++ findByEventAndCompetitor (event: Event, competitor: User): List&lt;Result&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>966</x><y>224</y><w>196</w><h>49</h></coordinates><panel_attributes>SportService
+--
++ existsByName (name: String): boolean
++ findByName (name: String): Sport</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>924</x><y>280</y><w>266</w><h>56</h></coordinates><panel_attributes>SportLevelService
+--
++ existsByName (name: String): boolean
++ findBysport (sport: Sport): List&lt;SportLevel&gt;
++ findBySportAndName (sport: Sport, name: String): SportLevel</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>966</x><y>343</y><w>196</w><h>49</h></coordinates><panel_attributes>GenderService
+--
++ existsByName (name: String): boolean
++ findByName (name: String): Gender</panel_attributes><additional_attributes></additional_attributes></element></diagram>
