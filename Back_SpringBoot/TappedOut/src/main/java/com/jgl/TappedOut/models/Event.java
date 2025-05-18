@@ -15,11 +15,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +25,7 @@ import lombok.NoArgsConstructor;
  * dates, location, organizer, and registration deails.
  * 
  * @author Jorge García López
- * @version 1.0
+ * @version 1.1
  * @since 2025
  */
 @Entity
@@ -43,34 +38,23 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Event SPORTID cannot be NULL")
     @ManyToOne
     @JoinColumn(name = "sport_id", nullable = false)
     private Sport sportId;
 
-    @NotNull(message = "Event ORGANIZERID cannot be NULL")
     @ManyToOne
     @JoinColumn(name = "organizer_id", nullable = false)
     private User organizerId;
 
-    @NotNull(message = "Event NAME cannot be NULL")
-    @NotEmpty(message = "Event NAME cannot be EMPTY")
-    @NotBlank(message = "Event NAME cannot be EMPTY")
     @Column(name = "name", nullable = false, length = 255)
     private String name;
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @NotNull(message = "Event STARTDATE cannot be NULL")
-    @NotEmpty(message = "Event STARTDATE cannot be EMPTY")
-    @FutureOrPresent(message = "Event STARTDATE must be either PRESENT OR FUTURE")
     @Column(name = "start_date", nullable = false)
     private LocalDateTime startDate;
 
-    @NotNull(message = "Event ENDDATE cannot be NULL")
-    @NotEmpty(message = "Event ENDDATE cannot be EMPTY")
-    @Future(message = "Event ENDDATE must be in the FUTURE")
     @Column(name = "end_date", nullable = false)
     private LocalDateTime endDate;
 
@@ -78,15 +62,9 @@ public class Event {
     @Column(name = "status", columnDefinition = "ENUM('PLANNED', 'ONGOING', 'COMPLETED', 'CANCELLED') DEFAULT 'PLANNED'")
     private EventStatus status = EventStatus.PLANNED;
 
-    @NotNull(message = "Event COUNTRY cannot be NULL")
-    @NotEmpty(message = "Event COUNTRY cannot be EMPTY")
-    @NotBlank(message = "Event COUNTRY cannot be EMPTY")
     @Column(name = "country", nullable = false, length = 100)
     private String country;
 
-    @NotNull(message = "Event CITY cannot be NULL")
-    @NotEmpty(message = "Event CITY cannot be EMPTY")
-    @NotBlank(message = "Event CITY cannot be EMPTY")
     @Column(name = "city", nullable = false, length = 100)
     private String city;
 
