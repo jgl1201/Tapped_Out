@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
  * sport, gender, age range, weight range and skill level (optional)
  * 
  * @author Jorge García López
- * @version 1.0
+ * @version 1.1
  * @since 2025
  */
 @Entity
@@ -36,14 +36,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Category SPORTID cannot be NULL")
     @ManyToOne
     @JoinColumn(name = "sport_id", nullable = false)
     private Sport sportId;
 
-    @NotNull(message = "Category NAME cannot be NULL")
-    @NotEmpty(message = "Category NAME cannot be EMPTY")
-    @NotBlank(message = "Category NAME cannot be BLANK")
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
@@ -59,7 +55,6 @@ public class Category {
     @Column(name = "max_weight", precision = 5, scale = 2)
     private BigDecimal maxWeight;
 
-    @NotNull(message = "Category GENDERID cannot be NULL")
     @ManyToOne
     @JoinColumn(name = "gender_id", nullable = false)
     private Gender genderId;
