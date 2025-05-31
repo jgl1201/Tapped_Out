@@ -23,7 +23,7 @@ import com.jgl.TappedOut.models.User;
  * @since 2025
  */
 @Repository
-public interface IncriptionRepository extends JpaRepository<Inscription, Long> {
+public interface InscriptionRepository extends JpaRepository<Inscription, Long> {
     List<Inscription> findByCompetitorId(User competitorId);
 
     List<Inscription> findByEventId(Event eventId);
