@@ -15,7 +15,7 @@ import com.jgl.TappedOut.models.Gender;
  */
 @Repository
 public interface GenderRepository extends JpaRepository<Gender, Long> {
-    boolean exisexistsByName(String name);
+    boolean existsByName(String name);
 
     Gender findByName(String name);
 }
