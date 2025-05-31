@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
  * There may be Admin, Organizer or Compettor users
  * 
  * @author Jorge García López
- * @version 1.0
+ * @version 1.1
  * @since 2025
  */
 @Entity
@@ -31,9 +31,6 @@ public class UserType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "UserType NAME cannot be NULL")
-    @NotEmpty(message = "UserType NAME cannot be EMPTY")
-    @NotBlank(message = "UserType NAME cannot be BLANK")
     @Column(name = "name", nullable = false, unique = true, length = 50)
     private String name;
 }

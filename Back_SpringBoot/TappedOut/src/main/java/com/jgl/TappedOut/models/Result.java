@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
  * Contains information about the final position and optional notes
  * 
  * @author Jorge García López
- * @version 1.0
+ * @version 1.1
  * @since 2025
  */
 @Entity
@@ -34,23 +34,18 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Result EVENTID cannot be NULL")
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
     private Event eventId;
 
-    @NotNull(message = "Result CATEGORYID cannot be NULL")
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category categoryId;
 
-    @NotNull(message = "Result COMPETITORID cannot be NULL")
     @ManyToOne
     @JoinColumn(name = "competitor_id", nullable = false)
     private User competitorId;
 
-    @NotNull(message = "Result POSITION cannot be NULL")
-    @NotEmpty(message = "Result POSITION cannot be EMPTY")
     @Column(name = "position", nullable = false)
     private Integer position;
 

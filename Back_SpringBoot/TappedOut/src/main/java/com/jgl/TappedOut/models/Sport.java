@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
  * Each sport canhave multiple categories and levels associated with it
  * 
  * @author Jorge García López
- * @version 1.0
+ * @version 1.1
  * @since 2025
  */
 @Entity
@@ -31,9 +31,6 @@ public class Sport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Sport NAME cannot be NULL")
-    @NotEmpty(message = "Sport NAME cannot be EMPTY")
-    @NotBlank(message = "Sport NAME cannot be BLANK")
     @Column(name = "name", nullable = false, unique = true, length = 100)
     private String name;
 }

@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
  * Contains information about the registration date and payment status
  * 
  * @author Jorge García López
- * @version 1.0
+ * @version 1.1
  * @since 2025
  */
 @Entity
@@ -35,17 +35,14 @@ public class Inscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Inscription COMPETITORID cannot be NULL")
     @ManyToOne
     @JoinColumn(name = "competitor_id", nullable = false)
     private User competitorId;
 
-    @NotNull(message = "Inscription EVENTID cannot be NULL")
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
-    @NotNull(message = "Inscription CATEGORYID cannot be NULL")
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category categoryId;

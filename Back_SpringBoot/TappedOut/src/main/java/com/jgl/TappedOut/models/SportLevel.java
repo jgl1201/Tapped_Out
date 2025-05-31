@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
  * Used to categorize competitors and competition divisions by skill level
  * 
  * @author Jorge García López
- * @version 1.0
+ * @version 1.1
  * @since 2025
  */
 @Entity
@@ -34,14 +34,10 @@ public class SportLevel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "SportLevel SPORTID cannot be NULL")
     @ManyToOne
     @JoinColumn(name = "sport_id", nullable = false)
     private Sport sportId;
 
-    @NotNull(message = "SportLevel NAME cannot be NULL")
-    @NotEmpty(message = "SportLevel NAME cannot be EMPTY")
-    @NotBlank(message = "SportLevel NAME cannot be BLANK")
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 }

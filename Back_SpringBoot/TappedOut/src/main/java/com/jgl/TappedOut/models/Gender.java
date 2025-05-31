@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
  * Used to categorized users and competition categories
  * 
  * @author Jorge García López
- * @version 1.0
+ * @version 1.1
  * @since 2025
 */
 @Entity
@@ -31,9 +31,6 @@ public class Gender {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Gender NAME cannot be NULL")
-    @NotEmpty(message = "Gender NAME cannot be EMPTY")
-    @NotBlank(message = "Gender NAME  cannot be BLANK")
     @Column(name = "name", nullable = false, unique = true, length = 50)
     private String name;
 }
