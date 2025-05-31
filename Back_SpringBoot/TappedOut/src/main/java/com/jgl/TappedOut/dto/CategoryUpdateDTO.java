@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Represents a DTO for returning a category entity to the user
+ * Represents a DTO for updating a category in the system
  * 
  * @author Jorge García López
  * @version 1.0
