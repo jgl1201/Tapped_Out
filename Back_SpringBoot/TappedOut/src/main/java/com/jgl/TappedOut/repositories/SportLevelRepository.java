@@ -23,4 +23,6 @@ public interface SportLevelRepository extends JpaRepository<SportLevel, Long> {
     List<SportLevel> findBySportId(Sport sportId);
 
     SportLevel findBySportIdAndName(Sport sportId, String name);
+
+    boolean existsByNameIgnoreCase(String name);
 }
