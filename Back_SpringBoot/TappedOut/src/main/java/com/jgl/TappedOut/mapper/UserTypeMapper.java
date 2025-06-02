@@ -2,6 +2,7 @@ package com.jgl.TappedOut.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.jgl.TappedOut.dto.UserTypeCreateDTO;
 import com.jgl.TappedOut.dto.UserTypeResponseDTO;
@@ -15,7 +16,8 @@ import com.jgl.TappedOut.models.UserType;
  * @version 1.1
  * @since 2025
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",
+    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public abstract class UserTypeMapper {
     /**
      * Method to convert {@link UserTypeCreateDTO} into a {@link UserType}

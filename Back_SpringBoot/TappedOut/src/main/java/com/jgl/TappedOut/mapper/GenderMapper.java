@@ -2,6 +2,7 @@ package com.jgl.TappedOut.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.jgl.TappedOut.dto.GenderCreateDTO;
 import com.jgl.TappedOut.dto.GenderResponseDTO;
@@ -17,7 +18,8 @@ import com.jgl.TappedOut.models.Gender;
  * @version 1.0
  * @since 2025
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",
+    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public abstract class GenderMapper {
     /**
      * Method to convert {@link GenderCreateDTO} into a {@link Gender}

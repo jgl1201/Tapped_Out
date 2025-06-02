@@ -4,6 +4,7 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jgl.TappedOut.dto.SportLevelCreateDTO;
@@ -21,7 +22,8 @@ import com.jgl.TappedOut.models.SportLevel;
  * @since 2025
  */
 @Mapper(componentModel = "spring",
-    uses = {SportMapper.class, MapperUtils.class})
+    uses = {SportMapper.class, MapperUtils.class},
+    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public abstract class SportLevelMapper {
     @Autowired
     protected MapperUtils mapperUtils;

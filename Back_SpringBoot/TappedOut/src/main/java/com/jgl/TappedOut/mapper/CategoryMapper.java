@@ -4,12 +4,15 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jgl.TappedOut.dto.CategoryCreateDTO;
 import com.jgl.TappedOut.dto.CategoryResponseDTO;
 import com.jgl.TappedOut.dto.CategoryUpdateDTO;
 import com.jgl.TappedOut.models.Category;
+
+import jakarta.persistence.EntityNotFoundException;
 
 /**
  * Mapper for converting between {@link Category} entities and DTOs.
@@ -20,7 +23,8 @@ import com.jgl.TappedOut.models.Category;
  * @since 2025
  */
 @Mapper(componentModel = "spring",
-    uses = {SportMapper.class, GenderMapper.class, SportLevelMapper.class, MapperUtils.class})
+    uses = {SportMapper.class, GenderMapper.class, SportLevelMapper.class, MapperUtils.class},
+    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public abstract class CategoryMapper {
     @Autowired
     protected MapperUtils mapperUtils;

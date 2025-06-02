@@ -2,6 +2,7 @@ package com.jgl.TappedOut.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.jgl.TappedOut.dto.SportCreateDTO;
 import com.jgl.TappedOut.dto.SportResponseDTO;
@@ -15,7 +16,8 @@ import com.jgl.TappedOut.models.Sport;
  * @version 1.0
  * @since 2025
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",
+    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public abstract class SportMapper {
     /**
      * Method to convert {@link SportCreateDTO} into a {@link Sport}
