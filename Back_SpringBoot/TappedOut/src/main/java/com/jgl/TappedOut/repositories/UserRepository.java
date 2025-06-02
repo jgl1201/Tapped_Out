@@ -36,6 +36,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByCountryAndCity(String country, String city);
 
+    boolean existsByDniIgnoreCase(String dni);
+
+    boolean existsByEmailIgnoreCase(String email);
+
     /**
      * Finds users by name or email
      * 
