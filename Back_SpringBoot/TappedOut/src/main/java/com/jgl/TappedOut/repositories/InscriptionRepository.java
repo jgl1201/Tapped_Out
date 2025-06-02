@@ -32,6 +32,8 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Long> 
 
     List<Inscription> findByPaymentStatus(PaymentStatus paymentStatus);
 
+    boolean existsByCompetitorIdAndEventIdAndCategoryId(Long competitorId, Long eventId, Long categoryId);
+
     /**
      * Finds all paid inscriptions for a specific event
      * 
