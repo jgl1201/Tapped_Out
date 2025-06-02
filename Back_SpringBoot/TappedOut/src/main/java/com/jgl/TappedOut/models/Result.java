@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
@@ -25,6 +26,7 @@ import lombok.NoArgsConstructor;
     @UniqueConstraint(columnNames = {"event_id", "category_id", "competitor_id"}),
     @UniqueConstraint(columnNames = {"event_id", "category_id", "position"})
 })
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Result {
