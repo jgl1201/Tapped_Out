@@ -1,5 +1,7 @@
 package com.jgl.TappedOut.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +17,5 @@ import com.jgl.TappedOut.models.UserType;
  */
 @Repository
 public interface UserTypeRepository extends JpaRepository<UserType, Long>{
-    boolean existsByName(String name);
-
-    UserType findByName(String name);
+    Optional<UserType> findByName(String name);
 }
