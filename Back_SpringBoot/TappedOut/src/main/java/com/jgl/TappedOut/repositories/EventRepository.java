@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,13 +24,13 @@ import com.jgl.TappedOut.models.User;
  */
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
-    List<Event> findBySportId(Sport sportId);
+    Optional<List<Event>> findBySportId(Sport sportId);
 
-    List<Event> findByOrganizerId(User organizerId);
+    Optional<List<Event>> findByOrganizerId(User organizerId);
 
-    List<Event> findByStatus(EventStatus status);
+    Optional<List<Event>> findByStatus(EventStatus status);
 
-    List<Event> findByCountryAndCity(String country, String city);
+    Optional<List<Event>> findByCountryAndCity(String country, String city);
 
     /**
      * Finds upcoming events (end date is in the future)
@@ -37,9 +38,9 @@ public interface EventRepository extends JpaRepository<Event, Long> {
      * @return list of upcoming events ordered by end date ascending
      */
     @Query("SELECT e FROM Event e WHERE " + 
-        "e.endDate >= CURRENT_DATE " +
-        "ORDER BY e.endDate ASC")
-    List<Event> findUpcomingEvents();
+        "e.startDate > CURRENT_DATE " +
+        "ORDER BY e.startDate ASC")
+    Optional<List<Event>> findUpcomingEvents();
 
     /**
      * Finds past events (end date is in the past)
@@ -49,7 +50,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query("SELECT e FROM Event e WHERE " +
         "e.endDate < CURRENT_DATE " +
         "ORDER BY e.endDate DESC")
-    List<Event> findPastEvents();
+    Optional<List<Event>> findPastEvents();
 
     /**
      * Searches events with flexible criteria
