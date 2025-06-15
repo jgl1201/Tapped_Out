@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -18,11 +19,7 @@ import com.jgl.TappedOut.models.SportLevel;
  */
 @Repository
 public interface SportLevelRepository extends JpaRepository<SportLevel, Long> {
-    boolean existsByName(String name);
+    Optional<List<SportLevel>> findBySportId(Sport sportId);
 
-    List<SportLevel> findBySportId(Sport sportId);
-
-    SportLevel findBySportIdAndName(Sport sportId, String name);
-
-    boolean existsByNameIgnoreCase(String name);
+    Optional<SportLevel> findBySportIdAndName(Sport sportId, String name);
 }
