@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,9 +23,9 @@ import com.jgl.TappedOut.models.EventCategoryId;
  */
 @Repository
 public interface EventCategoryRepository extends JpaRepository<EventCategory, EventCategoryId> {
-    List<EventCategory> findByEventId(Event eventId);
+    Optional<EventCategory> findByEventIdAndCategoryId(Event eventId, Category categoryId);
 
-    List<EventCategory> findByCategoryId(Category categoryId);
+    boolean existsByEventIdAndCategoryId(Event eventId, Category categoryId);
 
     /**
      * Finds all the categories available in a specific event
