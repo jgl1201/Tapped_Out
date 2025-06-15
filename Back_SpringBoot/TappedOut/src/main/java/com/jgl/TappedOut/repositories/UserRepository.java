@@ -22,23 +22,15 @@ import com.jgl.TappedOut.models.UserType;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    boolean existsByDni(String dni);
+    Optional<List<User>> findByTypeId(UserType typeId);
 
-    boolean existsByEmail(String email);
+    Optional<List<User>> findByGenderId(Gender genderId);
 
+    Optional<List<User>> findByCountryAndCity(String country, String city);
+    
     Optional<User> findByDni(String dni);
 
     Optional<User> findByEmail(String email);
-
-    List<User> findByTypeId(UserType typeId);
-
-    List<User> findByGenderId(Gender genderId);
-
-    List<User> findByCountryAndCity(String country, String city);
-
-    boolean existsByDniIgnoreCase(String dni);
-
-    boolean existsByEmailIgnoreCase(String email);
 
     /**
      * Finds users by name or email
