@@ -25,11 +25,11 @@ import com.jgl.TappedOut.models.SportLevel;
  */
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    List<Category> findBySportId(Sport sportId);
+    Optional<List<Category>> findBySportId(Sport sportId);
 
-    List<Category> findByGenderId(Gender genderId);
+    Optional<List<Category>> findByGenderId(Gender genderId);
 
-    List<Category> findByLevelId(SportLevel levelId);
+    Optional<List<Category>> findByLevelId(SportLevel levelId);
 
     Optional<Category> findBySportIdAndName(Sport sportId, String name);
 
