@@ -24,15 +24,23 @@ import com.jgl.TappedOut.models.User;
  */
 @Repository
 public interface InscriptionRepository extends JpaRepository<Inscription, Long> {
-    List<Inscription> findByCompetitorId(User competitorId);
+    Optional<List<Inscription>> findByCompetitorId(User competitorId);
 
-    List<Inscription> findByEventId(Event eventId);
+    Optional<List<Inscription>> findByEventId(Event eventId);
 
-    List<Inscription> findByCategoryId(Category categoryId);
+    Optional<List<Inscription>> findByEventIdAndCategoryId(Event eventId, Category categoryId);
 
-    List<Inscription> findByPaymentStatus(PaymentStatus paymentStatus);
+    Optional<List<Inscription>> findByPaymentStatus(PaymentStatus status);
 
-    boolean existsByCompetitorIdAndEventIdAndCategoryId(Long competitorId, Long eventId, Long categoryId);
+    Optional<List<Inscription>> findByEventIdAndPaymentStatus(Event eventId, PaymentStatus status);
+
+    Optional<List<Inscription>> findByCompetitorIdAndEventId(User competitorId, Event eventId);
+
+    Long countByEventIdAndPaymentStatus(Event eventId, PaymentStatus status);
+
+    boolean existsByCompetitorIdAndEventId(User competitorId, Event eventId);
+
+    boolean existsByCompetitorIdAndEventIdAndCategoryId(User competitorId, Event eventId, Category categoryId);
 
     /**
      * Finds all paid inscriptions for a specific event
@@ -45,29 +53,4 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Long> 
         "i.eventId.id = :eventId AND i.paymentStatus = 'PAID';")
     List<Inscription> findPaidInscriptionsByEventId(@Param("eventId") Long eventId);
 
-    /**
-     * Finds the number of paid inscriptions for a specific event
-     * 
-     * @param eventId the event ID
-     * 
-     * @return number of paid inscriptions for the event
-     */
-    @Query("SELECT COUNT(i) FROM Inscription i WHERE " +
-        "i.eventId.id = :eventId AND i.paymentStatus = 'PAID';")
-    Long countPaidInscriptionsByEventId(@Param("eventId") Long eventId);
-
-    /**
-     * Finds a specific inscription by competitor and event
-     * 
-     * @param userId the competitor ID
-     * @param eventId the event ID
-     * 
-     * @return Optional containing the inscription if found
-     */
-    @Query("SELECT i FROM Inscription i WHERE " +
-        "i.competitorId.id = :userId AND i.eventId.id = :eventId;")
-    Optional<Inscription> findByCompetitorAndEvent(
-        @Param("userId") Long userId,
-        @Param("eventId") Long eventId
-    );
 }
