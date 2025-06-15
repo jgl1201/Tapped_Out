@@ -1,10 +1,9 @@
 package com.jgl.TappedOut.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.jgl.TappedOut.models.Category;
@@ -22,40 +21,17 @@ import com.jgl.TappedOut.models.User;
  */
 @Repository
 public interface ResultRepository extends JpaRepository<Result, Long> {
-    List<Result> findByEventId(Event eventId);
+    Optional<List<Result>> findByEventId(Event eventId);
 
-    List<Result> findByCategoryId(Category categoryId);
+    Optional<List<Result>> findByEventIdAndCategoryId(Event eventId, Category categoryId);
 
-    List<Result> findByCompetitorId(User userId);
+    Optional<List<Result>> findByEventIdAndCompetitorId(Event eventId, User competitorId);
 
-    /**
-     * Finds results for a specific event and category, ordered by position
-     * 
-     * @param eventId the event ID
-     * @param categoryId the category ID
-     * 
-     * @return list of results ordered by placement
-     */
-    @Query("SELECT r FROM Result r WHERE " +
-        "r.eventId.id = :eventId AND r.categoryId.id = :categoryId " +
-        "ORDER BY r.position ASC")
-    List<Result> findByEventAndCategoryOrderByPosition(
-        @Param("eventId") Long eventId,
-        @Param("categoryId") Long categoryId
-    );
+    Optional<List<Result>> findByCompetitorId(User competitorId);
 
-    /**
-     * Finds result for a specific competitor in a specific event
-     * 
-     * @param eventId the event ID
-     * @param competitorId the competitor ID
-     * 
-     * @return list of results for the competitor in the event
-     */
-    @Query("SELECT r FROM Result r WHERE " +
-        "r.eventId.id = :eventId AND r.competitorId.id = :competitorId;")
-    List<Result> findByEventAndCompetitor(
-    @Param("eventId") Long eventId,
-    @Param("competitorId") Long competitorId
-    );
+    Optional<List<Result>> findByEventIdAndPosition(Event eventId, int position);
+
+    Optional<Result> findByEventIdAndCategoryIdAndPosition(Event eventId, Category categoryId, int position);
+
+    boolean existsByEventIdAndCategoryIdAndPosition(Event eventId, Category categoryId, int position);
 }
