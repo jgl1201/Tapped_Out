@@ -244,7 +244,7 @@ public class MapperUtils {
      * Validates competitor is registered for event/category
      * in order to register a result
      */
-    public void validateResultRegister(Long competitorId, Long eventId, Long categoryId) {
+    public void validateResultRegister(User competitorId, Event eventId, Category categoryId) {
         if (!inscriptionRepo.existsByCompetitorIdAndEventIdAndCategoryId(competitorId, eventId, categoryId))
             throw new IllegalArgumentException("Competitor is not registered for this event/category");
     }
