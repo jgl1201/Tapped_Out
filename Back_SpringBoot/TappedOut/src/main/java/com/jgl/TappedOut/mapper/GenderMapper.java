@@ -38,9 +38,9 @@ public abstract class GenderMapper {
     public abstract GenderResponseDTO toResponseDTO(Gender gender);
 
     /**
-     * Method to convert {@link GenderUpdateDTO} into a {@link Gender}
+     * Method to convert {@link GenderCreateDTO} into a {@link Gender}
      * 
-     * @param dto the GenderUpdateDTO
+     * @param dto the GenderCreateDTO
      * @param entity the entity to update
      */
     public abstract void updateFromDTO(GenderCreateDTO dto, @MappingTarget Gender entity);
