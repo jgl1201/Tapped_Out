@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Result {
-    @Id
+    @I
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
