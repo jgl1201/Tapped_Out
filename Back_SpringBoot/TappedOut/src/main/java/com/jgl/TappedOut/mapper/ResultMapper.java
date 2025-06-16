@@ -78,9 +78,9 @@ public abstract class ResultMapper {
         mapperUtils.validatePosition(result.getPosition());
 
         mapperUtils.validateResultRegister(
-            result.getCompetitorId().getId(),
-            result.getEventId().getId(),
-            result.getCategoryId().getId()
+            result.getCompetitorId(),
+            result.getEventId(),
+            result.getCategoryId()
         );
 
         mapperUtils.validateResultTiming(result.getEventId().getStartDate());
