@@ -290,51 +290,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     /**
-     * Private method to find category by Sport
-     * 
-     * @param sport Sport
-     * @return Category
-     * @throws EntityNotFoundException if category not found
-     */
-    private List<Category> findCategoryBySportOrThrow(Sport sport) {
-        return categoryRepo.findBySportId(sport)
-            .orElseThrow(() -> {
-                log.error("Category not found for Sport ID: {}", sport.getId());
-                throw new EntityNotFoundException("Category not found for sport ID " + sport.getId());
-            });
-    }
-
-    /**
-     * Private method to find category by Gender
-     * 
-     * @param gender Gender
-     * @return Category
-     * @throws EntityNotFoundException if category not found
-     */
-    private List<Category> findCategoryByGenderOrThrow(Gender gender) {
-        return categoryRepo.findByGenderId(gender)
-            .orElseThrow(() -> {
-                log.error("Category not found for Gender ID: {}", gender.getId());
-                throw new EntityNotFoundException("Category not found for gender ID " + gender.getId());
-            });
-    }
-
-    /**
-     * Private method to find category by SportLevel
-     * 
-     * @param level SportLevel
-     * @return Category
-     * @throws EntityNotFoundException if category not found
-     */
-    private List<Category> findCategoryByLevelOrThrow(SportLevel level) {
-        return categoryRepo.findByLevelId(level)
-            .orElseThrow(() -> {
-                log.error("Category not found for Level ID: {}", level.getId());
-                throw new EntityNotFoundException("Category not found for level ID " + level.getId());
-            });
-    }
-
-    /**
      * Method to find a category by ID
      * 
      * @param id Category ID
