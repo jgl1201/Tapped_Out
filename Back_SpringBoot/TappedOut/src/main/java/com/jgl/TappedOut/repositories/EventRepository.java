@@ -68,7 +68,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
         "(:city IS NULL OR LOWER(e.city) LIKE LOWER(CONCAT('%', :city, '%'))) AND " +
         "(:query IS NULL OR (LOWER(e.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
         "LOWER(e.description) LIKE LOWER(CONCAT('%', :query, '%'))));")
-    List<Event> searchEvents(
+    Optional<List<Event>> searchEvents(
         @Param("sport") Sport sport,
         @Param("country") String country,
         @Param("city") String city,
