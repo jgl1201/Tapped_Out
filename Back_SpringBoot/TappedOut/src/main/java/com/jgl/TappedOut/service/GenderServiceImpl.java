@@ -52,7 +52,8 @@ public class GenderServiceImpl implements GenderService {
     public List<GenderResponseDTO> getAllGenders() {
         log.debug("Fetching all Gender");
 
-        return genderRepo.findAll().stream()
+        return genderRepo.findAll()
+            .stream()
             .map(genderMapper::toResponseDTO)
             .collect(Collectors.toList());
     }

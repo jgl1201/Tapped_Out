@@ -52,7 +52,8 @@ public class SportServiceImpl implements SportService {
     public List<SportResponseDTO> getAllSports() {
         log.debug("Fetching all Sport");
 
-        return sportRepo.findAll().stream()
+        return sportRepo.findAll()
+            .stream()
             .map(sportMapper::toResponseDTO)
             .collect(Collectors.toList());
     }

@@ -52,7 +52,8 @@ public class UserTypeServiceImpl implements UserTypeService {
     public List<UserTypeResponseDTO> getAllUserTypes() {
         log.debug("Fetching all UserType");
 
-        return userTypeRepo.findAll().stream()
+        return userTypeRepo.findAll()
+            .stream()
             .map(userTypeMapper::toResponseDTO)
             .collect(Collectors.toList());
     }
