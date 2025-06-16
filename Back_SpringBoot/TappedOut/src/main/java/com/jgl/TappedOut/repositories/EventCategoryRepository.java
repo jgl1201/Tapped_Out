@@ -27,6 +27,8 @@ public interface EventCategoryRepository extends JpaRepository<EventCategory, Ev
 
     boolean existsByEventIdAndCategoryId(Event eventId, Category categoryId);
 
+    void deleteByEventId(Long eventId);
+
     /**
      * Finds all the categories available in a specific event
      * 
