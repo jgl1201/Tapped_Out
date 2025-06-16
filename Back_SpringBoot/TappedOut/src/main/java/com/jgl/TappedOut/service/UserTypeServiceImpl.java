@@ -172,13 +172,13 @@ public class UserTypeServiceImpl implements UserTypeService {
     }
 
     /**
-     * Private method to find a user type by ID
+     * Method to find a user type by ID
      * 
      * @param id UserType ID
      * @return UserType
      * @throws EntityNotFoundException if user type not found
      */
-    private UserType findUserTypeByIdOrThrow(Long id) {
+    public UserType findUserTypeByIdOrThrow(Long id) {
         return userTypeRepo.findById(id)
             .orElseThrow(() -> {
                 log.error("UserType with ID: {} not found", id);
@@ -187,13 +187,13 @@ public class UserTypeServiceImpl implements UserTypeService {
     }
 
     /**
-     * Private method to find a user type by NAME
+     * Method to find a user type by NAME
      * 
      * @param name UserType NAME
      * @return UserType
      * @throws EntityNotFoundException if user type not found
      */
-    private UserType findUserTypeByNameOrThrow(String name) {
+    public UserType findUserTypeByNameOrThrow(String name) {
         return userTypeRepo.findByName(name.trim())
             .orElseThrow(() -> {
                 log.error("UserType with NAME: {} not found", name);
@@ -202,12 +202,12 @@ public class UserTypeServiceImpl implements UserTypeService {
     }
 
     /**
-     * Private method to validate a user type does not exist by NAME
+     * Method to validate a user type does not exist by NAME
      * 
      * @param name UserType NAME
      * @throws DataIntegrityViolationException if user type already exists
      */
-    private void validateUserTypeNameNotExists(String name) {
+    public void validateUserTypeNameNotExists(String name) {
         if (userTypeRepo.findByName(name.trim()).isPresent()) {
             log.warn("Cannot create UserType - NAME '{}' already exists", name);
             throw new DataIntegrityViolationException("UserType with this name already exists");
