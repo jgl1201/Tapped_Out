@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Inscription {
-    @Id
+    @I
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
