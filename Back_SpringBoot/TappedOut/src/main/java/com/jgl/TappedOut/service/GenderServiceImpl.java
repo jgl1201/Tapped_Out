@@ -173,13 +173,13 @@ public class GenderServiceImpl implements GenderService {
     }
 
     /**
-     * Private method to find a gender by ID
+     * Method to find a gender by ID
      * 
      * @param id Gender ID
      * @return Gender
      * @throws EntityNotFoundException if gender not found
      */
-    private Gender findGenderByIdOrThrow(Long id) {
+    public Gender findGenderByIdOrThrow(Long id) {
         return genderRepo.findById(id)
             .orElseThrow(() -> {
                 log.error("Gender with ID: {} not found", id);
@@ -188,13 +188,13 @@ public class GenderServiceImpl implements GenderService {
     }
 
     /**
-     * Private method to find a gender by NAME
+     * Method to find a gender by NAME
      * 
      * @param name Gender NAME
      * @return Gender
      * @throws EntityNotFoundException if gender not found
      */
-    private Gender findGenderByNameOrThrow(String name) {
+    public Gender findGenderByNameOrThrow(String name) {
         return genderRepo.findByName(name.trim())
             .orElseThrow(() -> {
                 log.error("Gender with NAME: {} not found", name);
@@ -203,12 +203,12 @@ public class GenderServiceImpl implements GenderService {
     }
 
     /**
-     * Private method to validate gender does not exist by NAME
+     * Method to validate gender does not exist by NAME
      * 
      * @param name Gender NAME
      * @throws DataIntegrityViolationException if gender already exists
      */
-    private void validateGenderNameNotExists(String name) {
+    public void validateGenderNameNotExists(String name) {
         if (genderRepo.findByName(name.trim()).isPresent()) {
             log.warn("Cannot create Gender - NAME '{}' already exists", name);
             throw new DataIntegrityViolationException("Gender with this name already exists");
