@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
@@ -27,6 +28,7 @@ public abstract class GenderMapper {
      * @param dto the GenderCreateDTO to convert
      * @return the mapped Gender entity
      */
+    @Mapping(target = "id", ignore = true)
     public abstract Gender fromCreateDTO(GenderCreateDTO dto);
 
     /**
@@ -43,5 +45,6 @@ public abstract class GenderMapper {
      * @param dto the GenderCreateDTO
      * @param entity the entity to update
      */
+    @Mapping(target = "id", ignore = true)
     public abstract void updateFromDTO(GenderCreateDTO dto, @MappingTarget Gender entity);
 }

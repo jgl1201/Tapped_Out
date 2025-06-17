@@ -40,6 +40,7 @@ public abstract class CategoryMapper {
     @Mapping(target = "sportId", expression = "java(mapperUtils.mapSport(dto.getSportId()))")
     @Mapping(target = "genderId", expression = "java(mapperUtils.mapGender(dto.getGenderId()))")
     @Mapping(target = "levelId", expression = "java(mapperUtils.mapLevel(dto.getLevelId()))")
+    @Mapping(target = "id", ignore = true)
     public abstract Category fromCreateDTO(CategoryCreateDTO dto);
 
     /**
@@ -64,6 +65,7 @@ public abstract class CategoryMapper {
     @Mapping(target = "sportId", ignore = true)
     @Mapping(target = "genderId", ignore = true)
     @Mapping(target = "levelId", expression = "java(mapperUtils.mapLevel(dto.getLevelId()))")
+    @Mapping(target = "id", ignore = true)
     public abstract void updateFromDTO(CategoryUpdateDTO dto, @MappingTarget Category category);
 
     /**

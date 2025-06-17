@@ -107,7 +107,15 @@
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 						</path>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>1.6.3</version> <!-- Misma versión que mapstruct -->
+						</path>
 					</annotationProcessorPaths>
+					<compilerArgs>
+						<arg>-Amapstruct.defaultComponentModel=spring</arg> <!-- Opcional pero recomendado -->
+					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>

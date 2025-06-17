@@ -19,6 +19,7 @@ import com.jgl.TappedOut.repositories.InscriptionRepository;
 import com.jgl.TappedOut.repositories.ResultRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class to handle logic related with {@link Result}
@@ -32,10 +33,8 @@ import jakarta.persistence.EntityNotFoundException;
  */
 @Service
 @Transactional
+@Slf4j
 public class ResultServiceImpl implements ResultService {
-    @Autowired
-    private CustomLogger log;
-
     @Autowired
     private ResultRepository resultRepo;
 

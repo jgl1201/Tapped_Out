@@ -27,7 +27,7 @@ public interface EventCategoryRepository extends JpaRepository<EventCategory, Ev
 
     boolean existsByEventIdAndCategoryId(Event eventId, Category categoryId);
 
-    void deleteByEventId(Long eventId);
+    void deleteByEventId(Event eventId);
 
     /**
      * Finds all the categories available in a specific event
@@ -38,6 +38,6 @@ public interface EventCategoryRepository extends JpaRepository<EventCategory, Ev
      */
     @Query("SELECT c FROM Category c JOIN EventCategory ec " +
         "ON c.id = ec.categoryId.id WHERE " +
-        "ec.eventId.id = :eventId;")
+        "ec.eventId.id = :eventId")
     Optional<List<Category>> findCategoriesByEventId(@Param("eventId") Long eventId);
 }

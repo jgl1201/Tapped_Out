@@ -36,7 +36,10 @@ public abstract class UserMapper {
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "typeId", expression = "java(mapperUtils.mapUserType(dto.getTypeId()))")
-    @Mapping(target = "genderId", expression = "java(mapperUtils.mapGender(dto.getGenderId()))")
+    @Mapping(target = "genderId", source = "genderId.id")
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "isVerified", ignore = true)
+    @Mapping(target = "passwordHash", ignore = true)
     public abstract User fromCreateDTO(UserCreateDTO dto);
 
     /**
@@ -59,6 +62,10 @@ public abstract class UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "dni", ignore = true)
     @Mapping(target = "email", ignore = true)
+    @Mapping(target = "passwordHash", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "genderId", ignore = true)
+    @Mapping(target = "typeId", ignore = true)
     public abstract void updateFromDTO(UserUpdateDTO dto, @MappingTarget User entity);
 
     /**

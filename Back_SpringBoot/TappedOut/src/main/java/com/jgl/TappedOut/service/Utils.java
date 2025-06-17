@@ -1,5 +1,7 @@
 package com.jgl.TappedOut.service;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Utility class for Services common methods
  * 
@@ -7,6 +9,7 @@ package com.jgl.TappedOut.service;
  * @version 1.0
  * @since 2025
  */
+@Component
 public class Utils {
     /**
      * Method to check if name has changed

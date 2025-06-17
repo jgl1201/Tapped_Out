@@ -25,6 +25,7 @@ import com.jgl.TappedOut.repositories.EventCategoryRepository;
 import com.jgl.TappedOut.repositories.EventRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class to handle logic related with {@link Event}
@@ -38,10 +39,8 @@ import jakarta.persistence.EntityNotFoundException;
  */
 @Service
 @Transactional
+@Slf4j
 public class EventServiceImpl implements EventService {
-    @Autowired
-    private CustomLogger log;
-
     @Autowired
     private EventRepository eventRepo;
 
@@ -394,10 +393,10 @@ public class EventServiceImpl implements EventService {
     public void deleteEvent(Long id) {
         log.info("Deleting Event with ID: {}", id);
         
-        findEventByIdOrThrow(id);
+        Event event = findEventByIdOrThrow(id);
 
         try {
-            eventCategoryRepo.deleteByEventId(id);
+            eventCategoryRepo.deleteByEventId(event);
             eventRepo.deleteById(id);
             log.info("Successfully deleted Event with ID: {}", id);
         } catch (Exception e) {

@@ -42,7 +42,7 @@ public class Inscription {
 
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
-    private Event event;
+    private Event eventId;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)

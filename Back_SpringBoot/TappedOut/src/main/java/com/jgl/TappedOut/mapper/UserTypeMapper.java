@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
@@ -25,8 +26,9 @@ public abstract class UserTypeMapper {
      * @param dto the UserTypeCreateDTO to convert from
      * @return the mapped UserType entity to persist
      */
+    @Mapping(target = "id", ignore = true)
     public abstract UserType fromCreateDTO(UserTypeCreateDTO dto);
-
+    
     /**
      * Method to convert {@link UserType} into a {@link UserTypeResponseDTO}
      * 
@@ -34,12 +36,13 @@ public abstract class UserTypeMapper {
      * @return the mapped response DTO
      */
     public abstract UserTypeResponseDTO toResponseDTO(UserType user);
-
+    
     /**
      * Method to convert {@link UserTypeCreateDTO} into a {@link UserType}
      * 
      * @param dto the UserTypeCreateDTO to update from
      * @param userType the entity UserType to be updated
      */
+    @Mapping(target = "id", ignore = true)
     public abstract void updateFromDTO(UserTypeCreateDTO dto, @MappingTarget UserType userType);
 }

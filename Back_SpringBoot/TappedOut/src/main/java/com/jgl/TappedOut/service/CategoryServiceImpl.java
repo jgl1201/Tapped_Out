@@ -20,6 +20,7 @@ import com.jgl.TappedOut.models.SportLevel;
 import com.jgl.TappedOut.repositories.CategoryRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class to handle logic related with {@link Category}
@@ -33,10 +34,8 @@ import jakarta.persistence.EntityNotFoundException;
  */
 @Service
 @Transactional
+@Slf4j
 public class CategoryServiceImpl implements CategoryService {
-    @Autowired
-    private CustomLogger log;
-
     @Autowired
     private Utils utils;
 

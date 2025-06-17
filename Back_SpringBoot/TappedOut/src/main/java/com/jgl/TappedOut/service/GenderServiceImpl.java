@@ -15,6 +15,7 @@ import com.jgl.TappedOut.models.Gender;
 import com.jgl.TappedOut.repositories.GenderRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class to handle logic related with {@link Gender}
@@ -28,10 +29,8 @@ import jakarta.persistence.EntityNotFoundException;
  */
 @Service
 @Transactional
+@Slf4j
 public class GenderServiceImpl implements GenderService {
-    @Autowired
-    private CustomLogger log;
-
     @Autowired
     private Utils utils;
 

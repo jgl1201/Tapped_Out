@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.jgl.TappedOut.models.Category;
@@ -41,16 +39,5 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Long> 
     boolean existsByCompetitorIdAndEventId(User competitorId, Event eventId);
 
     boolean existsByCompetitorIdAndEventIdAndCategoryId(User competitorId, Event eventId, Category categoryId);
-
-    /**
-     * Finds all paid inscriptions for a specific event
-     * 
-     * @param eventId the event ID
-     * 
-     * @return list of paid inscriptions for the event
-     */
-    @Query("SELECT i FROM Inscription i WHERE " +
-        "i.eventId.id = :eventId AND i.paymentStatus = 'PAID';")
-    List<Inscription> findPaidInscriptionsByEventId(@Param("eventId") Long eventId);
 
 }

@@ -15,6 +15,7 @@ import com.jgl.TappedOut.models.Sport;
 import com.jgl.TappedOut.repositories.SportRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class to handle logic related with {@link Sport}
@@ -28,10 +29,8 @@ import jakarta.persistence.EntityNotFoundException;
  */
 @Service
 @Transactional
+@Slf4j
 public class SportServiceImpl implements SportService {
-    @Autowired
-    private CustomLogger log;
-
     @Autowired
     private Utils utils;
 

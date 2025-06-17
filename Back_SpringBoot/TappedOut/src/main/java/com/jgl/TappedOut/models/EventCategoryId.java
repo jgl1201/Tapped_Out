@@ -14,6 +14,6 @@ import lombok.Data;
  */
 @Data
 public class EventCategoryId implements Serializable {
-    private Long event;
-    private Long category;
+    private Long eventId;
+    private Long categoryId;
 }

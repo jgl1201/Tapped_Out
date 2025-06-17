@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
@@ -25,6 +26,7 @@ public abstract class SportMapper {
      * @param dto the SportCreateDTO to convert from
      * @return the mapped Gender entity to persist
      */
+    @Mapping(target = "id", ignore = true)
     public abstract Sport fromCreateDTO(SportCreateDTO dto);
 
     /**
@@ -41,5 +43,6 @@ public abstract class SportMapper {
      * @param dto the SportUpdateDTO to update from
      * @param sport the Sport entity to be updated
      */
+    @Mapping(target = "id", ignore = true)
     public abstract void updateFromDTO(SportCreateDTO dto, @MappingTarget Sport sport);
 }

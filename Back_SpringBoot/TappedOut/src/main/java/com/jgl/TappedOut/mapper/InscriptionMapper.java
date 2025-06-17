@@ -38,7 +38,7 @@ public abstract class InscriptionMapper {
      * @throws IllegalArgumentException if date ranges are invalid
      */
     @Mapping(target = "competitorId", expression = "java(mapperUtils.mapUser(dto.getCompetitorId()))")
-    @Mapping(target = "event", expression = "java(mapperUtils.mapEvent(dto.getEventId()))")
+    @Mapping(target = "eventId", expression = "java(mapperUtils.mapEvent(dto.getEventId()))")
     @Mapping(target = "categoryId", expression = "java(mapperUtils.mapCategory(dto.getCategoryId()))")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "registerDate", ignore = true)
@@ -64,7 +64,7 @@ public abstract class InscriptionMapper {
      * @throws EntityNotFoundException if referenced competitor, event or category not found
      */
     @Mapping(target = "competitorId", ignore = true)
-    @Mapping(target = "event", ignore = true)
+    @Mapping(target = "eventId", ignore = true)
     @Mapping(target = "categoryId", expression = "java(mapperUtils.mapCategory(dto.getCategoryId()))")
     @Mapping(target = "registerDate", ignore = true)
     @Mapping(target = "id", ignore = true)
@@ -79,9 +79,9 @@ public abstract class InscriptionMapper {
      */
     @AfterMapping
     protected void validateInscriptionCreation(@MappingTarget Inscription inscription) {
-        mapperUtils.validateCategoryEventMatch(inscription.getCategoryId(), inscription.getEvent());
+        mapperUtils.validateCategoryEventMatch(inscription.getCategoryId(), inscription.getEventId());
 
-        mapperUtils.validateInscription(inscription.getEvent().getStartDate());
+        mapperUtils.validateInscription(inscription.getEventId().getStartDate());
     }
 
     /**
@@ -94,13 +94,13 @@ public abstract class InscriptionMapper {
      */
     @AfterMapping
     protected void validateInscriptionUpdate(InscriptionUpdateDTO dto, @MappingTarget Inscription inscription) {
-        mapperUtils.validateCategoryEventMatch(inscription.getCategoryId(), inscription.getEvent());
+        mapperUtils.validateCategoryEventMatch(inscription.getCategoryId(), inscription.getEventId());
 
         mapperUtils.validateInscriptionCancellation(
             inscription.getRegisterDate(),
-            inscription.getEvent().getStartDate(),
+            inscription.getEventId().getStartDate(),
             dto.getPaymentStatus());
 
-        mapperUtils.validateInscription(inscription.getEvent().getStartDate());
+        mapperUtils.validateInscription(inscription.getEventId().getStartDate());
     }
 }

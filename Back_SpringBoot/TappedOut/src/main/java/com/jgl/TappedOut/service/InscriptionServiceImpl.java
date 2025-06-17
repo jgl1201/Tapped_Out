@@ -21,6 +21,7 @@ import com.jgl.TappedOut.models.User;
 import com.jgl.TappedOut.repositories.InscriptionRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class to handle logic related with {@link Inscription}
@@ -34,10 +35,8 @@ import jakarta.persistence.EntityNotFoundException;
  */
 @Service
 @Transactional
+@Slf4j
 public class InscriptionServiceImpl implements InscriptionService {
-    @Autowired
-    private CustomLogger log;
-
     @Autowired
     private InscriptionRepository inscriptionRepo;
 
@@ -280,7 +279,7 @@ public class InscriptionServiceImpl implements InscriptionService {
         User competitor = inscription.getCompetitorId();
         Category category = categoryService.findCategoryByIdOrThrow(dto.getCategoryId());
 
-        validateUserNotInscribedAtEvent(competitor, inscription.getEvent());
+        validateUserNotInscribedAtEvent(competitor, inscription.getEventId());
         validateCompetitorCategoryMatch(competitor, category);
 
         try {
