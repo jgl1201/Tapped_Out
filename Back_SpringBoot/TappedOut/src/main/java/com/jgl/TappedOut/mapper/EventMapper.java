@@ -40,6 +40,7 @@ public abstract class EventMapper {
     @Mapping(target = "organizerId", expression = "java(mapperUtils.mapUser(dto.getOrganizerId()))")
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "id", ignore = true)
     public abstract Event fromCreateDTO(EventCreateDTO dto);
 
     /**
@@ -65,6 +66,7 @@ public abstract class EventMapper {
     @Mapping(target = "organizerId", ignore = true)
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "id", ignore = true)
     public abstract void updateFromDTO(EventUpdateDTO dto, @MappingTarget Event event);
 
 
