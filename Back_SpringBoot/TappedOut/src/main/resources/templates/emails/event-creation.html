@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Evento Creado</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #e1e1e1; border-radius: 8px; }
+        .header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eaeaea; }
+        .logo { max-width: 150px; }
+        .content { padding: 20px 0; }
+        .footer { text-align: center; font-size: 12px; color: #999; padding-top: 20px; border-top: 1px solid #eaeaea; }
+        .button {
+            display: inline-block; padding: 12px 24px; background-color: #4CAF50; 
+            color: white !important; text-decoration: none; border-radius: 4px; 
+            font-weight: bold; margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <!--TODO add correct logo-->
+            <h1>¡Evento creado con éxito!</h1>
+        </div>
+        <div class="content">
+            <p>Has creado el evento: <strong th:text="${eventName}">Nombre del Evento</strong></p>
+            <p>Fecha: <span th:text="${eventDate}">fecha</span></p>
+            <p>Ahora puedes:</p>
+            <ul>
+                <li>Compartir el evento con otros usuarios</li>
+                <li>Gestionar las inscripciones</li>
+                <li>Actualizar los detalles del evento</li>
+            </ul>
+        </div>
+        <div class="footer">
+            <p>© 2025 TappedOut. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html>
