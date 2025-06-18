@@ -32,4 +32,3 @@ public interface EventService {
     EventResponseDTO updateEvent(Long id, EventUpdateDTO dto);
     void deleteEvent(Long id);
 }
-
