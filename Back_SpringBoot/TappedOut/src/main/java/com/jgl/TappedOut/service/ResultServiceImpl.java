@@ -84,7 +84,6 @@ public class ResultServiceImpl implements ResultService {
         Event event = eventService.findEventByIdOrThrow(eventId);
 
         return resultRepo.findByEventId(event)
-            .orElseThrow(() -> new EntityNotFoundException("Inscription not found for Event ID: " + eventId))
             .stream()
             .map(resultMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -108,7 +107,6 @@ public class ResultServiceImpl implements ResultService {
         Category category = categoryService.findCategoryByIdOrThrow(categoryId);
 
         return resultRepo.findByEventIdAndCategoryId(event, category)
-            .orElseThrow(() -> new EntityNotFoundException("Inscription not found for Event ID: " + eventId + " and Category ID: " + categoryId))
             .stream()
             .map(resultMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -131,7 +129,6 @@ public class ResultServiceImpl implements ResultService {
         Event event = eventService.findEventByIdOrThrow(eventId);
 
         return resultRepo.findByEventIdAndCompetitorId(event, competitor)
-            .orElseThrow(() -> new EntityNotFoundException("Inscription not found for Competitor ID: " + competitorId + " and Event ID: " + eventId))
             .stream()
             .map(resultMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -152,7 +149,6 @@ public class ResultServiceImpl implements ResultService {
         User competitor = userService.findUserByIdOrThrow(competitorId);
 
         return resultRepo.findByCompetitorId(competitor)
-            .orElseThrow(() -> new EntityNotFoundException("Inscription not found for Competitor ID: " + competitorId))
             .stream()
             .map(resultMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -174,7 +170,6 @@ public class ResultServiceImpl implements ResultService {
         Event event = eventService.findEventByIdOrThrow(eventId);
 
         return resultRepo.findByEventIdAndPosition(event, position)
-            .orElseThrow(() -> new EntityNotFoundException("Position not found"))
             .stream()
             .map(resultMapper::toResponseDTO)
             .collect(Collectors.toList());

@@ -77,7 +77,6 @@ public class SportLevelServiceImpl implements SportLevelService {
         Sport sport = sportService.findSportByIdOrThrow(sportId);
 
         return sportLevelRepo.findBySportId(sport)
-            .orElseThrow(() -> new EntityNotFoundException("SportLevel not found for Sport ID: " + sportId))
             .stream()
             .map(sportLevelMapper::toResponseDTO)
             .collect(Collectors.toList());

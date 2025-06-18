@@ -84,7 +84,6 @@ public class CategoryServiceImpl implements CategoryService {
         Sport sport = sportServiceImpl.findSportByIdOrThrow(sportId);
 
         return categoryRepo.findBySportId(sport)
-            .orElseThrow(() -> new EntityNotFoundException("Category not found for sport ID " + sportId))
             .stream()
             .map(categoryMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -105,7 +104,6 @@ public class CategoryServiceImpl implements CategoryService {
         Gender gender = genderServiceImpl.findGenderByIdOrThrow(genderId);
 
         return categoryRepo.findByGenderId(gender)
-            .orElseThrow(() -> new EntityNotFoundException("Category not found for gender ID " + genderId))
             .stream()
             .map(categoryMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -126,7 +124,6 @@ public class CategoryServiceImpl implements CategoryService {
         SportLevel sportLevel = sportLevelServiceImpl.findSportLevelByIdOrThrow(levelId);
 
         return categoryRepo.findByLevelId(sportLevel)
-            .orElseThrow(() -> new EntityNotFoundException("Category not found for level ID " + levelId))
             .stream()
             .map(categoryMapper::toResponseDTO)
             .collect(Collectors.toList());
