@@ -36,6 +36,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserServiceImpl implements UserService {
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private UserRepository userRepo;
 
     @Autowired
@@ -78,7 +81,6 @@ public class UserServiceImpl implements UserService {
         UserType userType = userTypeService.findUserTypeByIdOrThrow(typeId);
 
         return userRepo.findByTypeId(userType)
-            .orElseThrow(() -> new EntityNotFoundException("User not found for user type ID " + typeId))
             .stream()
             .map(userMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -99,7 +101,6 @@ public class UserServiceImpl implements UserService {
         Gender gender = genderService.findGenderByIdOrThrow(genderId);
         
         return userRepo.findByGenderId(gender)
-            .orElseThrow(() -> new EntityNotFoundException("User not found for gender ID " + genderId))
             .stream()
             .map(userMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -118,7 +119,6 @@ public class UserServiceImpl implements UserService {
         log.debug("Fetching User\n\tLocation -\n\t\tCountry: {}, City: {}", country, city);
 
         return userRepo.findByCountryAndCity(country.trim(), city.trim())
-            .orElseThrow(() -> new EntityNotFoundException("User not found for location " + country + ", " + city))
             .stream()
             .map(userMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -215,6 +215,9 @@ public class UserServiceImpl implements UserService {
             User user = userMapper.fromCreateDTO(dto);
             user = userRepo.save(user);
             log.info("Successfully created new User with ID: {}", user.getId());
+
+            emailService.sendWelcomeEmail(normalizedEmail, (dto.getFirstName() + " " + dto.getLastName()));
+
             return userMapper.toResponseDTO(user);
         } catch (Exception e) {
             log.error("Error creating User: {}", e.getMessage(), e);

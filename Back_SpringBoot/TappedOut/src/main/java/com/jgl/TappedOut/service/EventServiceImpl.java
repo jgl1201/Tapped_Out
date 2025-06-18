@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import com.jgl.TappedOut.dto.CategoryResponseDTO;
 import com.jgl.TappedOut.dto.EventCreateDTO;
 import com.jgl.TappedOut.dto.EventResponseDTO;
 import com.jgl.TappedOut.dto.EventUpdateDTO;
+import com.jgl.TappedOut.dto.InscriptionResponseDTO;
 import com.jgl.TappedOut.mapper.CategoryMapper;
 import com.jgl.TappedOut.mapper.EventMapper;
 import com.jgl.TappedOut.models.Category;
@@ -42,6 +44,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EventServiceImpl implements EventService {
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private EventRepository eventRepo;
 
     @Autowired
@@ -61,6 +66,9 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private CategoryServiceImpl categoryService;
+
+    @Autowired
+    private InscriptionServiceImpl inscriptionService;
 
 
     /**
@@ -92,7 +100,6 @@ public class EventServiceImpl implements EventService {
         Sport sport = sportService.findSportByIdOrThrow(sportId);
 
         return eventRepo.findBySportId(sport)
-            .orElseThrow(() -> new EntityNotFoundException("Event not found for Sport ID: " + sportId))
             .stream()
             .map(eventMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -112,7 +119,6 @@ public class EventServiceImpl implements EventService {
         User organizer = userService.findUserByIdOrThrow(organizerId);
 
         return eventRepo.findByOrganizerId(organizer)
-            .orElseThrow(() -> new EntityNotFoundException("Event not found for Organizer ID: " + organizerId))
             .stream()
             .map(eventMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -130,7 +136,6 @@ public class EventServiceImpl implements EventService {
         log.debug("Fetching Event\n\tStatus: {}", status);
 
         return eventRepo.findByStatus(status)
-            .orElseThrow(() -> new EntityNotFoundException("Event not found for Status: " + status))
             .stream()
             .map(eventMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -149,7 +154,6 @@ public class EventServiceImpl implements EventService {
         log.debug("Fetching Event\n\tLocation -\n\t\tCountry: {}, City: {}", country, city);
 
         return eventRepo.findByCountryAndCity(country.trim(), city.trim())
-            .orElseThrow(() -> new EntityNotFoundException("Event not found for location " + country + ", " + city))
             .stream()
             .map(eventMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -166,7 +170,6 @@ public class EventServiceImpl implements EventService {
         log.debug("Fetching upcoming Event");
 
         return eventRepo.findUpcomingEvents()
-            .orElseThrow(() -> new EntityNotFoundException("Event not found"))
             .stream()
             .map(eventMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -183,7 +186,6 @@ public class EventServiceImpl implements EventService {
         log.debug("Fetching past Event");
 
         return eventRepo.findPastEvents()
-            .orElseThrow(() -> new EntityNotFoundException("Event not found"))
             .stream()
             .map(eventMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -207,7 +209,6 @@ public class EventServiceImpl implements EventService {
         Sport sport = sportId != null ? sportService.findSportByIdOrThrow(sportId) : null;
 
         return eventRepo.searchEvents(sport, country, city, query)
-            .orElseThrow(() -> new EntityNotFoundException("Event not found"))
             .stream()
             .map(eventMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -253,7 +254,6 @@ public class EventServiceImpl implements EventService {
         findEventByIdOrThrow(eventId);
 
         return eventCategoryRepo.findCategoriesByEventId(eventId)
-            .orElseThrow(() -> new EntityNotFoundException("Category not found"))
             .stream()
             .map(categoryMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -337,7 +337,7 @@ public class EventServiceImpl implements EventService {
         dto.getName().trim(), dto.getSportId(), dto.getOrganizerId());
 
         sportService.findSportByIdOrThrow(dto.getSportId());
-        userService.findUserByIdOrThrow(dto.getOrganizerId());
+        User organizer = userService.findUserByIdOrThrow(dto.getOrganizerId());
 
         validateEventDates(dto.getStartDate(), dto.getEndDate());
         
@@ -345,6 +345,12 @@ public class EventServiceImpl implements EventService {
             Event event = eventMapper.fromCreateDTO(dto);
             event = eventRepo.save(event);
             log.info("Successfully created new event with ID: {}", event.getId());
+
+            emailService.sendEventCreationEmail(
+                organizer.getEmail().trim().toLowerCase(),
+                dto.getName().trim().toUpperCase(),
+                dto.getStartDate().toString());
+
             return eventMapper.toResponseDTO(event);
         } catch (Exception e) {
             log.error("Error creating event: {}", e.getMessage(), e);
@@ -374,6 +380,14 @@ public class EventServiceImpl implements EventService {
             eventMapper.updateFromDTO(dto, event);
             Event updatedEvent = eventRepo.save(event);
             log.info("Successfully updated event with ID: {}", id);
+
+            for (InscriptionResponseDTO ins : inscriptionService.getInscriptionsByEvent(id)) {
+                emailService.sendEventUpdateNotification(
+                    ins.getCompetitor().getEmail().trim().toLowerCase(),
+                    event.getName().trim().toUpperCase(),
+                    event.getStartDate().toString());
+            }
+
             return eventMapper.toResponseDTO(updatedEvent);
         } catch (Exception e) {
             log.error("Error updating event with ID: {} - {}", id, e.getMessage(), e);
@@ -402,6 +416,29 @@ public class EventServiceImpl implements EventService {
         } catch (Exception e) {
             log.error("Error deleting Event with ID: {} - {}", id, e.getMessage(), e);
             throw new RuntimeException("Failed to delete Event", e);
+        }
+    }
+
+    /**
+     * Scheduled method to send a reminder when a event is about to strat
+     */
+    @Scheduled(cron = "0 0 0 * * *")
+    public void sendReminder() {
+        LocalDateTime targetDate = LocalDateTime.now().plusDays(3).withHour(0).withMinute(0).withSecond(0).withNano(0);
+
+        List<Event> upcoming = eventRepo.findByStartDateBetween(targetDate, targetDate.plusDays(1));
+
+        for (Event event : upcoming) {
+            List<InscriptionResponseDTO> inscriptions = inscriptionService.getInscriptionsByEvent(event.getId());
+            log.info("Event with ID: {} has {} inscriptions", event.getId(), inscriptions.size());
+            log.info("Sending reminder to {} inscriptions", inscriptions.size());
+
+            for (InscriptionResponseDTO ins : inscriptions) {
+                emailService.sendRememberNotification(
+                    ins.getCompetitor().getEmail().trim().toLowerCase(),
+                    event.getName().trim().toUpperCase(),
+                    event.getStartDate().toString());
+            }
         }
     }
 

@@ -38,6 +38,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class InscriptionServiceImpl implements InscriptionService {
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private InscriptionRepository inscriptionRepo;
 
     @Autowired
@@ -84,7 +87,6 @@ public class InscriptionServiceImpl implements InscriptionService {
         User competitor = userService.findUserByIdOrThrow(competitorId);
 
         return inscriptionRepo.findByCompetitorId(competitor)
-            .orElseThrow(() -> new EntityNotFoundException("Inscription not found for Competitor ID: " + competitorId))
             .stream()
             .map(inscriptionMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -105,7 +107,6 @@ public class InscriptionServiceImpl implements InscriptionService {
         Event event = eventService.findEventByIdOrThrow(eventId);
 
         return inscriptionRepo.findByEventId(event)
-            .orElseThrow(() -> new EntityNotFoundException("Inscription not found for Event ID: " + eventId))
             .stream()
             .map(inscriptionMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -129,7 +130,6 @@ public class InscriptionServiceImpl implements InscriptionService {
         Category category = categoryService.findCategoryByIdOrThrow(categoryId);
 
         return inscriptionRepo.findByEventIdAndCategoryId(event, category)
-            .orElseThrow(() -> new EntityNotFoundException("Inscription not found for Event ID: " + eventId + " and Category ID: " + categoryId))
             .stream()
             .map(inscriptionMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -148,7 +148,6 @@ public class InscriptionServiceImpl implements InscriptionService {
         log.debug("Fetching Inscription\n\tPayment Status: {}", status);
 
         return inscriptionRepo.findByPaymentStatus(status)
-            .orElseThrow(() -> new EntityNotFoundException("Inscription not found for Payment Status: " + status))
             .stream()
             .map(inscriptionMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -169,7 +168,6 @@ public class InscriptionServiceImpl implements InscriptionService {
         Event event = eventService.findEventByIdOrThrow(eventId);
 
         return inscriptionRepo.findByEventIdAndPaymentStatus(event, PaymentStatus.PAID)
-            .orElseThrow(() -> new EntityNotFoundException("Inscription not found for Event ID: " + eventId))
             .stream()
             .map(inscriptionMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -225,7 +223,6 @@ public class InscriptionServiceImpl implements InscriptionService {
         Event event = eventService.findEventByIdOrThrow(eventId);
 
         return inscriptionRepo.findByCompetitorIdAndEventId(competitor, event)
-            .orElseThrow(() -> new EntityNotFoundException("Inscription not found for Competitor ID: " + competitorId + " and Event ID: " + eventId))
             .stream()
             .map(inscriptionMapper::toResponseDTO)
             .collect(Collectors.toList());
@@ -255,6 +252,12 @@ public class InscriptionServiceImpl implements InscriptionService {
             Inscription inscription = inscriptionMapper.fromCreateDTO(dto);
             inscription = inscriptionRepo.save(inscription);
             log.info("Successfully created Inscription with ID: {}", inscription.getId());
+
+            emailService.sendEventInscriptionEmail(
+                competitor.getEmail().trim().toLowerCase(),
+                event.getName().trim().toUpperCase(),
+                event.getStartDate().toString());
+
             return inscriptionMapper.toResponseDTO(inscription);
         } catch(Exception e) {
             log.error("Error creating Inscription: {}", e.getMessage(), e);
@@ -339,11 +342,7 @@ public class InscriptionServiceImpl implements InscriptionService {
      * @throws EntityNotFoundException if referenced Inscription not found
      */
     public List<Inscription> findInscriptionByCompetitorAndEventOrThrow(User competitor, Event event) {
-        return inscriptionRepo.findByCompetitorIdAndEventId(competitor, event)
-            .orElseThrow(() -> {
-                log.error("Inscription not found (Competitor ID: {} - Event ID: {})", competitor.getId(), event.getId());
-                throw new EntityNotFoundException("Inscription not found with Competitor ID: " + competitor.getId() + " and Event ID: " + event.getId());
-            });
+        return inscriptionRepo.findByCompetitorIdAndEventId(competitor, event);
     }
 
     /**

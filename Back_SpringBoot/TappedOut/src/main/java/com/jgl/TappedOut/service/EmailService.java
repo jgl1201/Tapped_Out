@@ -1,8 +1,5 @@
 package com.jgl.TappedOut.service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
@@ -103,13 +100,12 @@ public class EmailService {
         sendEmail(to, subject, htmlContent);
     }
 
-    public void sendRememberNotification(String to, String eventName, LocalDate date) {
+    public void sendRememberNotification(String to, String eventName, String date) {
         String subject = "Remember: " + eventName + " is about to start!";
-        String formattedDate = date.format(DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy"));
         
         Context context = new Context();
         context.setVariable("eventName", eventName);
-        context.setVariable("eventDate", formattedDate);
+        context.setVariable("eventDate", date);
         
         String htmlContent = templateEngine.process("emails/event-reminder", context);
         

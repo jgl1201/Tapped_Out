@@ -31,4 +31,5 @@ public interface EventService {
     EventResponseDTO createEvent(EventCreateDTO dto);
     EventResponseDTO updateEvent(Long id, EventUpdateDTO dto);
     void deleteEvent(Long id);
+    void sendReminder();
 }
