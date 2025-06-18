@@ -2,7 +2,6 @@ package com.jgl.TappedOut.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -92,7 +91,7 @@ public class EmailService {
         sendEmail(to, subject, htmlContent);
     }
 
-    public void sendEventUpdateNotification(List<String> recipients, String eventName, String eventDate) {
+    public void sendEventUpdateNotification(String to, String eventName, String eventDate) {
         String subject = "¡Un evento en TappedOut ha sido actualizado!";
         
         Context context = new Context();
@@ -101,10 +100,10 @@ public class EmailService {
         
         String htmlContent = templateEngine.process("emails/event-update", context);
         
-        recipients.forEach(to -> sendEmail(to, subject, htmlContent));
+        sendEmail(to, subject, htmlContent);
     }
 
-    public void sendRememberNotification(List<String> recipients, String eventName, LocalDate date) {
+    public void sendRememberNotification(String to, String eventName, LocalDate date) {
         String subject = "Remember: " + eventName + " is about to start!";
         String formattedDate = date.format(DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy"));
         
@@ -114,6 +113,6 @@ public class EmailService {
         
         String htmlContent = templateEngine.process("emails/event-reminder", context);
         
-        recipients.forEach(to -> sendEmail(to, subject, htmlContent));
+        sendEmail(to, subject, htmlContent);
     }
 }
