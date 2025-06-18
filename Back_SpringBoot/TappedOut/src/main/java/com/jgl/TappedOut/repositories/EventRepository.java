@@ -1,7 +1,7 @@
 package com.jgl.TappedOut.repositories;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,13 +24,15 @@ import com.jgl.TappedOut.models.User;
  */
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
-    Optional<List<Event>> findBySportId(Sport sportId);
+    List<Event> findBySportId(Sport sportId);
 
-    Optional<List<Event>> findByOrganizerId(User organizerId);
+    List<Event> findByOrganizerId(User organizerId);
 
-    Optional<List<Event>> findByStatus(EventStatus status);
+    List<Event> findByStatus(EventStatus status);
 
-    Optional<List<Event>> findByCountryAndCity(String country, String city);
+    List<Event> findByCountryAndCity(String country, String city);
+
+    List<Event> findByStartDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 
     /**
      * Finds upcoming events (end date is in the future)
@@ -40,7 +42,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query("SELECT e FROM Event e WHERE " + 
         "e.startDate > CURRENT_DATE " +
         "ORDER BY e.startDate ASC")
-    Optional<List<Event>> findUpcomingEvents();
+    List<Event> findUpcomingEvents();
 
     /**
      * Finds past events (end date is in the past)
@@ -50,7 +52,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query("SELECT e FROM Event e WHERE " +
         "e.endDate < CURRENT_DATE " +
         "ORDER BY e.endDate DESC")
-    Optional<List<Event>> findPastEvents();
+    List<Event> findPastEvents();
 
     /**
      * Searches events with flexible criteria
@@ -68,7 +70,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
         "(:city IS NULL OR LOWER(e.city) LIKE LOWER(CONCAT('%', :city, '%'))) AND " +
         "(:query IS NULL OR (LOWER(e.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
         "LOWER(e.description) LIKE LOWER(CONCAT('%', :query, '%'))))")
-    Optional<List<Event>> searchEvents(
+    List<Event> searchEvents(
         @Param("sport") Sport sport,
         @Param("country") String country,
         @Param("city") String city,

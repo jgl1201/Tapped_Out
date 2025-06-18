@@ -39,5 +39,5 @@ public interface EventCategoryRepository extends JpaRepository<EventCategory, Ev
     @Query("SELECT c FROM Category c JOIN EventCategory ec " +
         "ON c.id = ec.categoryId.id WHERE " +
         "ec.eventId.id = :eventId")
-    Optional<List<Category>> findCategoriesByEventId(@Param("eventId") Long eventId);
+    List<Category> findCategoriesByEventId(@Param("eventId") Long eventId);
 }

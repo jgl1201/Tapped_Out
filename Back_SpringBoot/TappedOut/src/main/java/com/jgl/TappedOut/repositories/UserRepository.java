@@ -22,11 +22,11 @@ import com.jgl.TappedOut.models.UserType;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<List<User>> findByTypeId(UserType typeId);
+    List<User> findByTypeId(UserType typeId);
 
-    Optional<List<User>> findByGenderId(Gender genderId);
+    List<User> findByGenderId(Gender genderId);
 
-    Optional<List<User>> findByCountryAndCity(String country, String city);
+    List<User> findByCountryAndCity(String country, String city);
     
     Optional<User> findByDni(String dni);
 

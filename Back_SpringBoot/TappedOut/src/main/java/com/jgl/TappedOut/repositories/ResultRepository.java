@@ -21,15 +21,15 @@ import com.jgl.TappedOut.models.User;
  */
 @Repository
 public interface ResultRepository extends JpaRepository<Result, Long> {
-    Optional<List<Result>> findByEventId(Event eventId);
+    List<Result> findByEventId(Event eventId);
 
-    Optional<List<Result>> findByEventIdAndCategoryId(Event eventId, Category categoryId);
+    List<Result> findByEventIdAndCategoryId(Event eventId, Category categoryId);
 
-    Optional<List<Result>> findByEventIdAndCompetitorId(Event eventId, User competitorId);
+    List<Result> findByEventIdAndCompetitorId(Event eventId, User competitorId);
 
-    Optional<List<Result>> findByCompetitorId(User competitorId);
+    List<Result> findByCompetitorId(User competitorId);
 
-    Optional<List<Result>> findByEventIdAndPosition(Event eventId, int position);
+    List<Result> findByEventIdAndPosition(Event eventId, int position);
 
     Optional<Result> findByEventIdAndCategoryIdAndPosition(Event eventId, Category categoryId, int position);
 

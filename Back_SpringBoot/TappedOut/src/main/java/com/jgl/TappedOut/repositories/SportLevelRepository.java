@@ -19,7 +19,7 @@ import com.jgl.TappedOut.models.SportLevel;
  */
 @Repository
 public interface SportLevelRepository extends JpaRepository<SportLevel, Long> {
-    Optional<List<SportLevel>> findBySportId(Sport sportId);
+    List<SportLevel> findBySportId(Sport sportId);
 
     Optional<SportLevel> findBySportIdAndName(Sport sportId, String name);
 
