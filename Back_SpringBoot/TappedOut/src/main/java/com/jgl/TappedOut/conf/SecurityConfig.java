@@ -54,7 +54,10 @@ public class SecurityConfig {
                 // ? ========================
                 
                 // * Event read for non registered users
-                .requestMatchers(HttpMethod.GET, "/api/tappedout/event/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/event").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/event/").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/sport/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/upcoming/**").permitAll()
 
                 // * User creation (Registering)
                 .requestMatchers(HttpMethod.POST, "/api/tappedout/user").permitAll()
@@ -116,7 +119,15 @@ public class SecurityConfig {
                 // ? ========================
 
                 // * Read - ADMIN, ORGANIZER, COMPETITOR
-                .requestMatchers(HttpMethod.GET, "/api/tappedout/user/**").hasAnyRole("ADMIN", "ORGANIZER", "COMPETITOR")
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/user").hasAnyRole("ADMIN", "ORGANIZER", "COMPETITOR")
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/user/").hasAnyRole("ADMIN", "ORGANIZER", "COMPETITOR")
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/user/type/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/user/gender/**").hasAnyRole("ADMIN", "ORGANIZER", "COMPETITOR")
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/user/location/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/user/search/**").hasAnyRole("ADMIN", "ORGANIZER", "COMPETITOR")
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/user/id/**").hasAnyRole("ADMIN", "ORGANIZER", "COMPETITOR")
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/user/dni/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/tappedout/user/email/**").hasRole("ADMIN")
 
                 // * Creation - defined as public endpoint
 
