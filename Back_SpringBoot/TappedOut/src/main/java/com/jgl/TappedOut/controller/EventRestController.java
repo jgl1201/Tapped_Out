@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 import com.jgl.TappedOut.service.EventService;
+import com.jgl.TappedOut.service.PermissionsService;
 import com.jgl.TappedOut.dto.EventResponseDTO;
 import com.jgl.TappedOut.dto.EventCreateDTO;
 import com.jgl.TappedOut.dto.EventUpdateDTO;
@@ -35,6 +37,10 @@ import com.jgl.TappedOut.dto.CategoryResponseDTO;
 public class EventRestController {
     @Autowired
     private EventService eventService;
+
+    @SuppressWarnings("unused")
+    @Autowired
+    private PermissionsService permissionsService;
 
     /**
      * GET /api/tappedout/event
@@ -112,6 +118,7 @@ public class EventRestController {
      * @return List of EventResponseDTO
      */
     @GetMapping({"/organizer/{organizerId}", "/organizer/{organizerId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves all events of an organizer",
         parameters = {
@@ -151,6 +158,7 @@ public class EventRestController {
      * @return List of EventResponseDTO
      */
     @GetMapping({"/status/{status}", "/status/{status}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves all events by status",
         parameters = {
@@ -185,6 +193,7 @@ public class EventRestController {
      * @return List of EventResponseDTO
      */
     @GetMapping({"/location", "/location/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves events by location",
         parameters = {
@@ -247,6 +256,7 @@ public class EventRestController {
      * @return List of EventResponseDTO
      */
     @GetMapping({"/past", "/past/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves past events",
         responses = {
@@ -280,6 +290,7 @@ public class EventRestController {
      * @return List of EventResponseDTO
      */
     @GetMapping({"/search", "/search/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Searches events by filters",
         parameters = {
@@ -317,6 +328,7 @@ public class EventRestController {
      * @throws EntityNotFoundException if event not found
      */
     @GetMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves an event by ID",
         parameters = {
@@ -357,6 +369,7 @@ public class EventRestController {
      * @throws EntityNotFoundException if event not found
      */
     @GetMapping({"/{eventId}/categories", "/{eventId}/categories/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves categories associated with an event",
         parameters = {
@@ -399,6 +412,7 @@ public class EventRestController {
      * @throws RuntimeException if failed to add category to event
      */
     @PostMapping({"/{eventId}/category/{categoryId}", "/{eventId}/category/{categoryId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER') and @permissionsService.canEditEvent(#eventId)")
     @Operation(
         summary = "Adds a category to an event",
         parameters = {
@@ -443,6 +457,7 @@ public class EventRestController {
      * @throws RuntimeException if failed to remove category from event
      */
     @DeleteMapping({"/{eventId}/category/{categoryId}", "/{eventId}/category/{categoryId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER') and @permissionsService.canEditEvent(#eventId)")
     @Operation(
         summary = "Removes a category from an event",
         parameters = {
@@ -478,6 +493,7 @@ public class EventRestController {
      * @throws RuntimeException if failed to create event
      */
     @PostMapping({"", "/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER')")
     @Operation(
         summary = "Creates a new event",
         responses = {
@@ -523,6 +539,7 @@ public class EventRestController {
      * @throws RuntimeException if failed to update event
      */
     @PutMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER') and @permissionsService.canEditEvent(#id)")
     @Operation(
         summary = "Updates an existing event",
         parameters = {
@@ -569,6 +586,7 @@ public class EventRestController {
      * @throws RuntimeException if failed to delete event
      */
     @DeleteMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER') and @permissionsService.canEditEvent(#id)")
     @Operation(
         summary = "Deletes an event by ID",
         parameters = {
