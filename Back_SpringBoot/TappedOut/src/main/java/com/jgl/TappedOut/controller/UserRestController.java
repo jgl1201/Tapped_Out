@@ -35,7 +35,7 @@ import com.jgl.TappedOut.dto.UserSecurityDTO;
 @RestController
 @RequestMapping("/user")
 @Tag(name = "User", description = "API Endpoints for User management")
-public class UserRestController extends BaseController {
+public class UserRestController {
     @Autowired
     private UserService userService;
 

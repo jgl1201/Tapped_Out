@@ -36,7 +36,7 @@ import com.jgl.TappedOut.dto.CategoryResponseDTO;
 @RestController
 @RequestMapping("/event")
 @Tag(name = "Event", description = "API Endpoints for Event")
-public class EventRestController extends BaseController {
+public class EventRestController {
     @Autowired
     private EventService eventService;
 

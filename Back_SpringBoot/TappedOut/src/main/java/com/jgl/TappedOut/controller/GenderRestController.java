@@ -32,7 +32,7 @@ import com.jgl.TappedOut.dto.GenderCreateDTO;
 @RestController
 @RequestMapping("/gender")
 @Tag(name = "Gender", description = "API Endpoints for Gender management")
-public class GenderRestController extends BaseController {
+public class GenderRestController {
     @Autowired
     private GenderService genderService;
 

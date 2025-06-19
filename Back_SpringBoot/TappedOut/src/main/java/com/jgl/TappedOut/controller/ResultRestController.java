@@ -33,7 +33,7 @@ import com.jgl.TappedOut.dto.ResultUpdateDTO;
 @RestController
 @RequestMapping("/results")
 @Tag(name = "Result", description = "Endpoints for Result")
-public class ResultRestController extends BaseController {
+public class ResultRestController {
     @Autowired
     private ResultService resultService;
 

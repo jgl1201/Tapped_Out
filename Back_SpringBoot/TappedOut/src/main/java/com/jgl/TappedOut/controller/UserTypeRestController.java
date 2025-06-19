@@ -33,7 +33,7 @@ import com.jgl.TappedOut.dto.UserTypeCreateDTO;
 @RequestMapping("/user-types")
 @PreAuthorize("hasRole('ADMIN')")
 @Tag(name = "UserType", description = "API Endpoints for User Type management")
-public class UserTypeRestController extends BaseController {
+public class UserTypeRestController {
     @Autowired
     private UserTypeService userTypeService;
 

@@ -34,7 +34,7 @@ import com.jgl.TappedOut.dto.CategoryUpdateDTO;
 @RestController
 @RequestMapping("/category")
 @Tag(name = "Category", description = "API Endpoints for Category management")
-public class CategoryRestController extends BaseController {
+public class CategoryRestController {
     @Autowired
     private CategoryService categoryService;
 

@@ -33,7 +33,7 @@ import com.jgl.TappedOut.dto.SportLevelUpdateDTO;
 @RestController
 @RequestMapping("/sport-level")
 @Tag(name = "SportLevel", description = "API Endpoints for Sport Level management")
-public class SportLevelController extends BaseController {
+public class SportLevelController {
     @Autowired
     private SportLevelService sportLevelService;
 

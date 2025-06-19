@@ -33,7 +33,7 @@ import com.jgl.TappedOut.service.*;
 @RestController
 @RequestMapping("/inscription")
 @Tag(name = "Inscription", description = "Endpoints for Inscription")
-public class InscriptionRestController extends BaseController {
+public class InscriptionRestController {
     @Autowired
     private InscriptionService inscriptionService;
 
