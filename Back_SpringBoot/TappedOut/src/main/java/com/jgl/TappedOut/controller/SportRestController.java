@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class SportRestController {
      * @return List of SportResponseDTO
      */
     @GetMapping({"", "/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves all sports",
         responses = {
@@ -71,6 +73,7 @@ public class SportRestController {
      * @throws EntityNotFoundException if sport not found
      */
     @GetMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves a specific Sport by ID",
         parameters = {
@@ -111,6 +114,7 @@ public class SportRestController {
      * @throws EntityNotFoundException if sport not found
      */
     @GetMapping({"/name/{name}", "/name/{name}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves a specific Sport by NAME",
         parameters = {
@@ -152,6 +156,7 @@ public class SportRestController {
      * @throws RuntimeException if sport creation fails
      */
     @PostMapping({"", "/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Creates a new Sport",
         responses = {
@@ -198,6 +203,7 @@ public class SportRestController {
      * @throws RuntimeException if sport update fails
      */
     @PutMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Updates a specific Sport by ID",
         parameters = {
@@ -250,6 +256,7 @@ public class SportRestController {
      * @throws RuntimeException if sport deletion fails
      */
     @DeleteMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Deletes a specific Sport by ID",
         parameters = {
