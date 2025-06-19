@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ public class CategoryRestController {
      * @return List of CategoryResponseDTO
      */
     @GetMapping({"", "/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves all categories",
         responses = {
@@ -73,6 +75,7 @@ public class CategoryRestController {
      * @throws EntityNotFoundException if sport not found
      */
     @GetMapping({"/sport/{sportId}", "/sport/{sportId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves categories by sport ID",
         parameters = {
@@ -113,6 +116,7 @@ public class CategoryRestController {
      * @throws EntityNotFoundException if gender not found
      */
     @GetMapping({"/gender/{genderId}", "/gender/{genderId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves categories by gender ID",
         parameters = {
@@ -153,6 +157,7 @@ public class CategoryRestController {
      * @throws EntityNotFoundException if sport level not found
      */
     @GetMapping({"/level/{levelId}", "/level/{levelId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves categories by sport level ID",
         parameters = {
@@ -199,6 +204,7 @@ public class CategoryRestController {
      * @throws EntityNotFoundException if sport, gender or level not found
      */
     @GetMapping({"/search", "/search/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Searches categories by multiple filters",
         parameters = {
@@ -246,6 +252,7 @@ public class CategoryRestController {
      * @throws EntityNotFoundException if category not found
      */
     @GetMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves a category by ID",
         parameters = {
@@ -287,6 +294,7 @@ public class CategoryRestController {
      * @throws EntityNotFoundException if category or sport not found
      */
     @GetMapping({"/sport/{sportId}/name/{name}", "/sport/{sportId}/name/{name}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves a category by sport ID and name",
         parameters = {
@@ -330,6 +338,7 @@ public class CategoryRestController {
      * @throws RuntimeException if failed to create category
      */
     @PostMapping({"", "/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Creates a new category",
         responses = {
@@ -382,6 +391,7 @@ public class CategoryRestController {
      * @throws RuntimeException if failed to update category
      */
     @PutMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Updates a category",
         parameters = {
@@ -434,6 +444,7 @@ public class CategoryRestController {
      * @throws RuntimeException if failed to delete category
      */
     @DeleteMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Deletes a category",
         parameters = {
