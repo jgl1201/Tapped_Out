@@ -38,7 +38,7 @@ public class UserTypeRestController {
     private UserTypeService userTypeService;
 
     /**
-     * GET /api/tappedout/user-type    
+     * GET /user-type    
      * Retrieves all user types
      * 
      * @return List of UserTypeResponseDTO
@@ -67,7 +67,7 @@ public class UserTypeRestController {
     }
 
     /**
-     * GET /api/tappedout/user-type/{id}
+     * GET /user-type/{id}
      * Retrieves a user type by ID
      * 
      * @param id the UserType ID
@@ -107,7 +107,7 @@ public class UserTypeRestController {
     }
 
     /**
-     * GET /api/tappedout/user-type/name/{name}
+     * GET /user-type/name/{name}
      * Retrieves a user type by NAME
      * 
      * @param name UserType NAME
@@ -147,7 +147,7 @@ public class UserTypeRestController {
     }
 
     /**
-     * POST /api/tappedout/user-type
+     * POST /user-type
      * Creates a new user type
      * 
      * @param dto UserTypeCreateDTO
@@ -191,7 +191,7 @@ public class UserTypeRestController {
     }
 
     /**
-     * PUT /api/tappedout/user-type/{id}
+     * PUT /user-type/{id}
      * Updates a specific user type
      * 
      * @param id the UserType ID
@@ -246,7 +246,7 @@ public class UserTypeRestController {
     }
 
     /**
-     * DELETE /api/tappedout/user-type/{id}
+     * DELETE /user-type/{id}
      * Deletes a specific user type
      * 
      * @param id the UserType ID

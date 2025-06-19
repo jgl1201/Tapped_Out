@@ -60,7 +60,7 @@ public class AuthRestController {
 
     /**
      * Endpoint to login
-     * POST /api/tappedout/auth/login
+     * POST /auth/login
      */
     @PostMapping({"/login", "/login/"})
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDTO dto) {
@@ -94,7 +94,7 @@ public class AuthRestController {
 
     /**
      * Endpoint to register
-     * POST /api/tappedout/auth/register
+     * POST /auth/register
      */
     @PostMapping({"/register", "/register/"})
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequestDTO dto) {
@@ -152,7 +152,7 @@ public class AuthRestController {
 
     /**
      * Endpoint to validate token
-     * GET /api/tappedout/auth/validate
+     * GET /auth/validate
      */
     @GetMapping({"/validate", "/validate/"})
     public ResponseEntity<?> validateToken(@RequestHeader("Authorization") String authHeader) {

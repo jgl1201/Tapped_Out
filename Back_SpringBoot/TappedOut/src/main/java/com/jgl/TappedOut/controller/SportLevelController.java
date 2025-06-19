@@ -38,7 +38,7 @@ public class SportLevelController {
     private SportLevelService sportLevelService;
 
     /**
-     * GET /api/tappedout/sport-level
+     * GET /sport-level
      * Retrieves all sport levels
      * 
      * @return List of SportLevelResponseDTO
@@ -68,7 +68,7 @@ public class SportLevelController {
     }
 
     /**
-     * GET /api/tappedout/sport-level/sport/{sportId}
+     * GET /sport-level/sport/{sportId}
      * Retrieves all sport levels by SPORT
      * 
      * @param sportId the Sport IDsport level id
@@ -109,7 +109,7 @@ public class SportLevelController {
     }
 
     /**
-     * GET /api/tappedout/sport-level/{id}
+     * GET /sport-level/{id}
      * Retrieves a sport level by ID
      * 
      * @param id the SportLevel ID
@@ -150,7 +150,7 @@ public class SportLevelController {
     }
 
     /**
-     * GET /api/tappedout/sport-level/sport/{sportId}/name/{name}
+     * GET /sport-level/sport/{sportId}/name/{name}
      * Retrieves a sport level by sport ID and level NAME
      * 
      * @param sportId Sport ID
@@ -193,7 +193,7 @@ public class SportLevelController {
     }
 
     /**
-     * POST /api/tappedout/sport-level
+     * POST /sport-level
      * Creates a new sport level
      * 
      * @param dto SportLevelCreateDTO
@@ -245,7 +245,7 @@ public class SportLevelController {
     }
 
     /**
-     * PUT /api/tappedout/sport-level/{id}
+     * PUT /sport-level/{id}
      * Updates an existing sport level
      * 
      * @param id the SportLevel ID
@@ -301,7 +301,7 @@ public class SportLevelController {
     }
 
     /**
-     * DELETE /api/tappedout/sport-level/{id}
+     * DELETE /sport-level/{id}
      * Deletes a specific sport level
      * 
      * @param id the SportLevel ID

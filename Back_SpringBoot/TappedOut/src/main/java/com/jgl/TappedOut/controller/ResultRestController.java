@@ -42,7 +42,7 @@ public class ResultRestController {
     private PermissionsService permissionsService;
 
     /**
-     * GET /api/tappedout/result    
+     * GET /result    
      * Retrieves all results
      * 
      * @return List of ResultResponseDTO
@@ -72,7 +72,7 @@ public class ResultRestController {
     }
 
     /**
-     * GET /api/tappedout/result/event/{eventId}
+     * GET /result/event/{eventId}
      * Retrieves results by event ID
      * 
      * @param eventId Event ID
@@ -113,7 +113,7 @@ public class ResultRestController {
     }
 
     /**
-     * GET /api/tappedout/result/event/{eventId}/category/{categoryId}
+     * GET /result/event/{eventId}/category/{categoryId}
      * Retrieves results by event and category ID
      * 
      * @param eventId Event ID
@@ -156,7 +156,7 @@ public class ResultRestController {
     }
 
     /**
-     * GET /api/tappedout/result/competitor/{competitorId}/event/{eventId}
+     * GET /result/competitor/{competitorId}/event/{eventId}
      * Retrieves results by competitor and event ID
      * 
      * @param competitorId Competitor ID
@@ -199,7 +199,7 @@ public class ResultRestController {
     }
 
     /**
-     * GET /api/tappedout/result/competitor/{competitorId}
+     * GET /result/competitor/{competitorId}
      * Retrieves results by competitor ID
      * 
      * @param competitorId Competitor ID
@@ -240,7 +240,7 @@ public class ResultRestController {
     }
 
     /**
-     * GET /api/tappedout/result/event/{eventId}/position/{position}
+     * GET /result/event/{eventId}/position/{position}
      * Retrieves results by event ID and position
      * 
      * @param eventId Event ID
@@ -283,7 +283,7 @@ public class ResultRestController {
     }
 
     /**
-     * GET /api/tappedout/result/{id}
+     * GET /result/{id}
      * Retrieves a result by ID
      * 
      * @param id Result ID
@@ -324,7 +324,7 @@ public class ResultRestController {
     }
 
     /**
-     * GET /api/tappedout/result/event/{eventId}/category/{categoryId}/winners
+     * GET /result/event/{eventId}/category/{categoryId}/winners
      * Retrieves winners by event and category ID
      * 
      * @param eventId Event ID
@@ -367,7 +367,7 @@ public class ResultRestController {
     }
 
     /**
-     * POST /api/tappedout/result
+     * POST /result
      * Creates a new result
      * 
      * @param dto ResultCreateDTO
@@ -412,7 +412,7 @@ public class ResultRestController {
     }
 
     /**
-     * PUT /api/tappedout/result/{id}
+     * PUT /result/{id}
      * Updates a result
      * 
      * @param id Result ID
@@ -461,7 +461,7 @@ public class ResultRestController {
     }
 
     /**
-     * DELETE /api/tappedout/result/{id}
+     * DELETE /result/{id}
      * Deletes a result
      * 
      * @param id Result ID

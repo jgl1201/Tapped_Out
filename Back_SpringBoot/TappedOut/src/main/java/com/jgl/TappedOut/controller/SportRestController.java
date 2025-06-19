@@ -37,7 +37,7 @@ public class SportRestController {
     private SportService sportService;
 
     /**
-     * GET /api/tappedout/sport
+     * GET /sport
      * Retrieves all sports
      * 
      * @return List of SportResponseDTO
@@ -67,7 +67,7 @@ public class SportRestController {
     }
 
     /**
-     * GET /api/tappedout/sport/{id}
+     * GET /sport/{id}
      * Retrieves a sport by ID
      * 
      * @param id the Sport ID
@@ -108,7 +108,7 @@ public class SportRestController {
     }
 
     /**
-     * GET /api/tappedout/sport/name/{name}
+     * GET /sport/name/{name}
      * Retrieves a sport by NAME
      * 
      * @param name Sport NAME
@@ -149,7 +149,7 @@ public class SportRestController {
     }
 
     /**
-     * POST /api/tappedout/sport
+     * POST /sport
      * Creates a new sport
      * 
      * @param dto SportCreateDTO
@@ -194,7 +194,7 @@ public class SportRestController {
     }
 
     /**
-     * PUT /api/tappedout/sport/{id}
+     * PUT /sport/{id}
      * Updates a specific sport
      * 
      * @param id the Sport ID
@@ -250,7 +250,7 @@ public class SportRestController {
     }
 
     /**
-     * DELETE /api/tappedout/sport/{id}
+     * DELETE /sport/{id}
      * Deletes a specific sport
      * 
      * @param id the Sport ID

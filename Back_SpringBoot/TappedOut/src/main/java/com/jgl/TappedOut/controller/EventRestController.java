@@ -45,7 +45,7 @@ public class EventRestController {
     private PermissionsService permissionsService;
 
     /**
-     * GET /api/tappedout/event
+     * GET /event
      * Retrieves all events
      * 
      * @return List of EventResponseDTO
@@ -74,7 +74,7 @@ public class EventRestController {
     }
 
     /**
-     * GET /api/tappedout/event/sport/{sportId}
+     * GET /event/sport/{sportId}
      * Retrieves events by sport ID
      * 
      * @param sportId Sport ID
@@ -113,7 +113,7 @@ public class EventRestController {
     }
 
     /**
-     * GET /api/tappedout/event/organizer/{organizerId}
+     * GET /event/organizer/{organizerId}
      * Retrieves events by organizer ID
      * 
      * @param organizerId Organizer ID
@@ -153,7 +153,7 @@ public class EventRestController {
     }
 
     /**
-     * GET /api/tappedout/event/status/{status}
+     * GET /event/status/{status}
      * Retrieves events by status
      * 
      * @param status Event status
@@ -187,7 +187,7 @@ public class EventRestController {
     }
 
     /**
-     * GET /api/tappedout/event/location
+     * GET /event/location
      * Retrieves events by location
      * 
      * @param country Country name
@@ -223,7 +223,7 @@ public class EventRestController {
     }
 
     /**
-     * GET /api/tappedout/event/upcoming
+     * GET /event/upcoming
      * Retrieves upcoming events
      * 
      * @return List of EventResponseDTO
@@ -252,7 +252,7 @@ public class EventRestController {
     }
 
     /**
-     * GET /api/tappedout/event/past
+     * GET /event/past
      * Retrieves past events
      * 
      * @return List of EventResponseDTO
@@ -282,7 +282,7 @@ public class EventRestController {
     }
 
     /**
-     * GET /api/tappedout/event/search
+     * GET /event/search
      * Searches events by filters
      * 
      * @param sportId Sport ID (optional)
@@ -322,7 +322,7 @@ public class EventRestController {
     }
 
     /**
-     * GET /api/tappedout/event/{id}
+     * GET /event/{id}
      * Retrieves an event by ID
      * 
      * @param id Event ID
@@ -363,7 +363,7 @@ public class EventRestController {
     }
 
     /**
-     * GET /api/tappedout/event/{eventId}/categories
+     * GET /event/{eventId}/categories
      * Retrieves categories associated with an event
      * 
      * @param eventId Event ID
@@ -404,7 +404,7 @@ public class EventRestController {
     }
 
     /**
-     * POST /api/tappedout/event/{eventId}/category/{categoryId}
+     * POST /event/{eventId}/category/{categoryId}
      * Adds a category to an event
      * 
      * @param eventId Event ID
@@ -450,7 +450,7 @@ public class EventRestController {
     }
 
     /**
-     * DELETE /api/tappedout/event/{eventId}/category/{categoryId}
+     * DELETE /event/{eventId}/category/{categoryId}
      * Removes a category from an event
      * 
      * @param eventId Event ID
@@ -487,7 +487,7 @@ public class EventRestController {
     }
 
     /**
-     * POST /api/tappedout/event
+     * POST /event
      * Creates a new event
      * 
      * @param dto EventCreateDTO
@@ -531,7 +531,7 @@ public class EventRestController {
     }
 
     /**
-     * PUT /api/tappedout/event/{id}
+     * PUT /event/{id}
      * Updates an existing event
      * 
      * @param id Event ID
@@ -580,7 +580,7 @@ public class EventRestController {
     }
 
     /**
-     * DELETE /api/tappedout/event/{id}
+     * DELETE /event/{id}
      * Deletes an event by ID
      * 
      * @param id Event ID

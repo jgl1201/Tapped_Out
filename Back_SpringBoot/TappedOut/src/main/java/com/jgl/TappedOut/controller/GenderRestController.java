@@ -37,7 +37,7 @@ public class GenderRestController {
     private GenderService genderService;
 
     /**
-     * GET /api/tappedout/gender    
+     * GET /gender    
      * Retrieves all genders
      * 
      * @return List of GenderResponseDTO
@@ -67,7 +67,7 @@ public class GenderRestController {
     }
 
     /**
-     * GET /api/tappedout/gender/{id}
+     * GET /gender/{id}
      * Retrieves a gender by ID
      * 
      * @param id the Gender ID
@@ -108,7 +108,7 @@ public class GenderRestController {
     }
 
     /**
-     * GET /api/tappedout/gender/name/{name}
+     * GET /gender/name/{name}
      * Retrieves a gender by NAME
      * 
      * @param name Gender NAME
@@ -149,7 +149,7 @@ public class GenderRestController {
     }
 
     /**
-     * POST /api/tappedout/gender
+     * POST /gender
      * Creates a new gender
      * 
      * @param dto GenderCreateDTO
@@ -194,7 +194,7 @@ public class GenderRestController {
     }
 
     /**
-     * PUT /api/tappedout/gender/{id}
+     * PUT /gender/{id}
      * Updates a specific gender
      * 
      * @param id the Gender ID
@@ -250,7 +250,7 @@ public class GenderRestController {
     }
 
     /**
-     * DELETE /api/tappedout/gender/{id}
+     * DELETE /gender/{id}
      * Deletes a specific gender
      * 
      * @param id the Gender ID

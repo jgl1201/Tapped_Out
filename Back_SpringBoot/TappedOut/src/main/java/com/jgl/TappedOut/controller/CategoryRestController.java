@@ -39,7 +39,7 @@ public class CategoryRestController {
     private CategoryService categoryService;
 
     /**
-     * GET /api/tappedout/category
+     * GET /category
      * Retrieves all categories
      * 
      * @return List of CategoryResponseDTO
@@ -69,7 +69,7 @@ public class CategoryRestController {
     }
 
     /**
-     * GET /api/tappedout/category/sport/{sportId}
+     * GET /category/sport/{sportId}
      * Retrieves categories by sport ID
      * 
      * @param sportId Sport ID
@@ -110,7 +110,7 @@ public class CategoryRestController {
     }
 
     /**
-     * GET /api/tappedout/category/gender/{genderId}
+     * GET /category/gender/{genderId}
      * Retrieves categories by gender ID
      * 
      * @param genderId Gender ID
@@ -151,7 +151,7 @@ public class CategoryRestController {
     }
 
     /**
-     * GET /api/tappedout/category/level/{levelId}
+     * GET /category/level/{levelId}
      * Retrieves categories by sport level ID
      * 
      * @param levelId Sport Level ID
@@ -192,7 +192,7 @@ public class CategoryRestController {
     }
 
     /**
-     * GET /api/tappedout/category/search
+     * GET /category/search
      * Searches categories by multiple filters
      * 
      * @param sportId Sport ID (required)
@@ -246,7 +246,7 @@ public class CategoryRestController {
     }
 
     /**
-     * GET /api/tappedout/category/{id}
+     * GET /category/{id}
      * Retrieves a category by ID
      * 
      * @param id Category ID
@@ -287,7 +287,7 @@ public class CategoryRestController {
     }
 
     /**
-     * GET /api/tappedout/category/sport/{sportId}/name/{name}
+     * GET /category/sport/{sportId}/name/{name}
      * Retrieves a category by sport ID and name
      * 
      * @param sportId Sport ID
@@ -330,7 +330,7 @@ public class CategoryRestController {
     }
 
     /**
-     * POST /api/tappedout/category
+     * POST /category
      * Creates a new category
      * 
      * @param dto CategoryCreateDTO
@@ -382,7 +382,7 @@ public class CategoryRestController {
     }
 
     /**
-     * PUT /api/tappedout/category/{id}
+     * PUT /category/{id}
      * Updates a category
      * 
      * @param id Category ID
@@ -438,7 +438,7 @@ public class CategoryRestController {
     }
 
     /**
-     * DELETE /api/tappedout/category/{id}
+     * DELETE /category/{id}
      * Deletes a category
      * 
      * @param id Category ID

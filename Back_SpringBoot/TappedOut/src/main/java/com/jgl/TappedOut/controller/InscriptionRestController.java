@@ -42,7 +42,7 @@ public class InscriptionRestController {
     private PermissionsService permissionsService;
 
     /**
-     * GET /api/tappedout/inscription
+     * GET /inscription
      * Retrieves all inscriptions
      * 
      * @return List of InscriptionResponseDTO
@@ -72,7 +72,7 @@ public class InscriptionRestController {
     }
 
     /**
-     * GET /api/tappedout/inscription/competitor/{competitorId}
+     * GET /inscription/competitor/{competitorId}
      * Retrieves inscriptions by competitor ID
      * 
      * @param competitorId Competitor ID
@@ -113,7 +113,7 @@ public class InscriptionRestController {
     }
 
     /**
-     * GET /api/tappedout/inscription/event/{eventId}
+     * GET /inscription/event/{eventId}
      * Retrieves inscriptions by event ID
      * 
      * @param eventId Event ID
@@ -154,7 +154,7 @@ public class InscriptionRestController {
     }
 
     /**
-     * GET /api/tappedout/inscription/event/{eventId}/category/{categoryId}
+     * GET /inscription/event/{eventId}/category/{categoryId}
      * Retrieves inscriptions by event and category ID
      * 
      * @param eventId Event ID
@@ -197,7 +197,7 @@ public class InscriptionRestController {
     }
 
     /**
-     * GET /api/tappedout/inscription/status/{status}
+     * GET /inscription/status/{status}
      * Retrieves inscriptions by payment status
      * 
      * @param status Payment status
@@ -231,7 +231,7 @@ public class InscriptionRestController {
     }
 
     /**
-     * GET /api/tappedout/inscription/event/{eventId}/paid
+     * GET /inscription/event/{eventId}/paid
      * Retrieves paid inscriptions for an event
      * 
      * @param eventId Event ID
@@ -272,7 +272,7 @@ public class InscriptionRestController {
     }
 
     /**
-     * GET /api/tappedout/inscription/event/{eventId}/paid/count
+     * GET /inscription/event/{eventId}/paid/count
      * Counts paid inscriptions for an event
      * 
      * @param eventId Event ID
@@ -309,7 +309,7 @@ public class InscriptionRestController {
     }
 
     /**
-     * GET /api/tappedout/inscription/{id}
+     * GET /inscription/{id}
      * Retrieves an inscription by ID
      * 
      * @param id Inscription ID
@@ -350,7 +350,7 @@ public class InscriptionRestController {
     }
 
     /**
-     * GET /api/tappedout/inscription/competitor/{competitorId}/event/{eventId}
+     * GET /inscription/competitor/{competitorId}/event/{eventId}
      * Retrieves inscriptions by competitor and event
      * 
      * @param competitorId Competitor ID
@@ -393,7 +393,7 @@ public class InscriptionRestController {
     }
 
     /**
-     * POST /api/tappedout/inscription
+     * POST /inscription
      * Creates a new inscription
      * 
      * @param dto InscriptionCreateDTO
@@ -438,7 +438,7 @@ public class InscriptionRestController {
     }
 
     /**
-     * PUT /api/tappedout/inscription/{id}
+     * PUT /inscription/{id}
      * Updates an inscription
      * 
      * @param id Inscription ID
@@ -487,7 +487,7 @@ public class InscriptionRestController {
     }
 
     /**
-     * DELETE /api/tappedout/inscription/{id}
+     * DELETE /inscription/{id}
      * Deletes an inscription
      * 
      * @param id Inscription ID

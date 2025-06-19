@@ -44,7 +44,7 @@ public class UserRestController {
     private PermissionsService permissionsService;
 
     /**
-     * GET /api/tappedout/user    
+     * GET /user    
      * Retrieves all users
      * 
      * @return List of UserResponseDTO
@@ -74,7 +74,7 @@ public class UserRestController {
     }
 
     /**
-     * GET /api/tappedout/user/type/{typeId}
+     * GET /user/type/{typeId}
      * Retrieves all users by TYPE
      * 
      * @param typeId UserType ID
@@ -115,7 +115,7 @@ public class UserRestController {
     }
 
     /**
-     * GET /api/tappedout/user/gender/{genderId}
+     * GET /user/gender/{genderId}
      * Retrieves all users by GENDER
      * 
      * @param genderId Gender ID
@@ -156,7 +156,7 @@ public class UserRestController {
     }
 
     /**
-     * GET /api/tappedout/user/location
+     * GET /user/location
      * Retrieves all users by LOCATION
      * 
      * @param country Country
@@ -193,7 +193,7 @@ public class UserRestController {
     }
 
     /**
-     * GET /api/tappedout/user/search
+     * GET /user/search
      * Retrieves all users by NAME or EMAIL
      * 
      * @param query Search term
@@ -227,7 +227,7 @@ public class UserRestController {
     }
 
     /**
-     * GET /api/tappedout/user/{id}
+     * GET /user/{id}
      * Retrieves a user by ID
      * 
      * @param userId User ID
@@ -268,7 +268,7 @@ public class UserRestController {
     }
 
     /**
-     * GET /api/tappedout/user/dni/{dni}
+     * GET /user/dni/{dni}
      * Retrieves a user by DNI
      * 
      * @param dni User DNI
@@ -309,7 +309,7 @@ public class UserRestController {
     }
 
     /**
-     * GET /api/tappedout/user/email/{email}
+     * GET /user/email/{email}
      * Retrieves a user by EMAIL
      * 
      * @param email User EMAIL
@@ -350,7 +350,7 @@ public class UserRestController {
     }
 
     /**
-     * POST /api/tappedout/user
+     * POST /user
      * Creates a new user
      * 
      * @param dto UserCreateDTO
@@ -394,7 +394,7 @@ public class UserRestController {
     }
 
     /**
-     * PUT /api/tappedout/user/{id}
+     * PUT /user/{id}
      * Updates a user
      * 
      * @param id User ID
@@ -450,7 +450,7 @@ public class UserRestController {
     }
 
     /**
-     * PATCH /api/tappedout/user/{id}/security
+     * PATCH /user/{id}/security
      * Updates a user auth information (email and password)
      * 
      * @param id User ID
@@ -505,7 +505,7 @@ public class UserRestController {
     }
 
     /**
-     * DELETE /api/tappedout/user/{id}
+     * DELETE /user/{id}
      * Deletes a user
      * 
      * @param id User ID
