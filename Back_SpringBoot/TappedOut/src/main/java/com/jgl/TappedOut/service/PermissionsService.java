@@ -128,7 +128,7 @@ public class PermissionsService {
      * ADMIN: can see inscriptions of any competitor
      * COMPETITOR: can see their own inscriptions
      */
-    public boolean canSeeCompotitorInscriptions(Long competitorId) {
+    public boolean canSeeCompetitorInscriptions(Long competitorId) {
         User currUser = getCurrentUser();
 
         if (currUser == null) return false;
