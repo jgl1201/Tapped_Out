@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import jakarta.validation.Valid;
 
 import java.util.List;
 
+import com.jgl.TappedOut.service.PermissionsService;
 import com.jgl.TappedOut.service.ResultService;
 import com.jgl.TappedOut.dto.ResultResponseDTO;
 import com.jgl.TappedOut.dto.ResultCreateDTO;
@@ -34,6 +36,10 @@ public class ResultRestController {
     @Autowired
     private ResultService resultService;
 
+    @SuppressWarnings("unused")
+    @Autowired
+    private PermissionsService permissionsService;
+
     /**
      * GET /api/tappedout/result    
      * Retrieves all results
@@ -41,6 +47,7 @@ public class ResultRestController {
      * @return List of ResultResponseDTO
      */
     @GetMapping({"", "/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves all results",
         responses = {
@@ -72,6 +79,7 @@ public class ResultRestController {
      * @throws EntityNotFoundException if event not found
      */
     @GetMapping({"/event/{eventId}", "/event/{eventId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves results by event ID",
         parameters = {
@@ -113,6 +121,7 @@ public class ResultRestController {
      * @throws EntityNotFoundException if event or category not found
      */
     @GetMapping({"/event/{eventId}/category/{categoryId}", "/event/{eventId}/category/{categoryId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves results by event and category ID",
         parameters = {
@@ -155,6 +164,7 @@ public class ResultRestController {
      * @throws EntityNotFoundException if competitor or event not found
      */
     @GetMapping({"/competitor/{competitorId}/event/{eventId}", "/competitor/{competitorId}/event/{eventId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves results by competitor and event ID",
         parameters = {
@@ -196,6 +206,7 @@ public class ResultRestController {
      * @throws EntityNotFoundException if competitor not found
      */
     @GetMapping({"/competitor/{competitorId}", "/competitor/{competitorId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves results by competitor ID",
         parameters = {
@@ -237,6 +248,7 @@ public class ResultRestController {
      * @throws EntityNotFoundException if event not found
      */
     @GetMapping({"/event/{eventId}/position/{position}", "/event/{eventId}/position/{position}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves results by event ID and position",
         parameters = {
@@ -278,6 +290,7 @@ public class ResultRestController {
      * @throws EntityNotFoundException if result not found
      */
     @GetMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves a result by ID",
         parameters = {
@@ -319,6 +332,7 @@ public class ResultRestController {
      * @throws EntityNotFoundException if event or category not found
      */
     @GetMapping({"/event/{eventId}/category/{categoryId}/winners", "/event/{eventId}/category/{categoryId}/winners/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves winners by event and category ID",
         parameters = {
@@ -361,6 +375,7 @@ public class ResultRestController {
      * @throws IllegalArgumentException if competitor not inscribed or position not unique
      */
     @PostMapping({"", "/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER') and @permissionsService.canEditResults(#dto.getEventId)")
     @Operation(
         summary = "Creates a new result",
         responses = {
@@ -406,6 +421,7 @@ public class ResultRestController {
      * @throws IllegalArgumentException if position not unique
      */
     @PutMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER') and @permissionsService.canEditResult(#id)")
     @Operation(
         summary = "Updates a result",
         parameters = {
@@ -451,6 +467,7 @@ public class ResultRestController {
      * @throws EntityNotFoundException if result not found
      */
     @DeleteMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Deletes a result",
         parameters = {
