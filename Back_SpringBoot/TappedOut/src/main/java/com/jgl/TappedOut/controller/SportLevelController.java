@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ public class SportLevelController {
      * @return List of SportLevelResponseDTO
      */
     @GetMapping({"", "/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves all sport levels",
         responses = {
@@ -72,6 +74,7 @@ public class SportLevelController {
      * @throws EntityNotFoundException if sport not found
      */
     @GetMapping({"/sport/{sportId}", "/sport/{sportId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves all sport levels for a specific sport",
         parameters = {
@@ -112,6 +115,7 @@ public class SportLevelController {
      * @throws EntityNotFoundException if sport level not found
      */
     @GetMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves a specific Sport Level by ID",
         parameters = {
@@ -153,6 +157,7 @@ public class SportLevelController {
      * @throws EntityNotFoundException if sport or sport level not found
      */
     @GetMapping({"/sport/{sportId}/name/{name}", "/sport/{sportId}/name/{name}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves a sport level by sport ID and level NAME",
         parameters = {
@@ -196,6 +201,7 @@ public class SportLevelController {
      * @throws RuntimeException if failed to create sport level
      */
     @PostMapping({"", "/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Creates a new Sport Level",
         responses = {
@@ -248,6 +254,7 @@ public class SportLevelController {
      * @throws RuntimeException if failed to update sport level
      */
     @PutMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Updates an existing Sport Level",
         parameters = {
@@ -300,6 +307,7 @@ public class SportLevelController {
      * @throws RuntimeException if failed to delete sport level
      */
     @DeleteMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Deletes a specific Sport Level by ID",
         parameters = {
