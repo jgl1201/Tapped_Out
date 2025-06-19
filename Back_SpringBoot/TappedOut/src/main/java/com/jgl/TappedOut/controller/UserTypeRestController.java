@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import com.jgl.TappedOut.dto.UserTypeCreateDTO;
  */
 @RestController
 @RequestMapping("/user-types")
+@PreAuthorize("hasRole('ADMIN')")
 @Tag(name = "UserType", description = "API Endpoints for User Type management")
 public class UserTypeRestController {
     @Autowired
