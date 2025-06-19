@@ -39,7 +39,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "*")
-public class AuthRestController {
+public class AuthRestController extends BaseController {
     @Autowired
     private AuthenticationManager authenticationManager;
 

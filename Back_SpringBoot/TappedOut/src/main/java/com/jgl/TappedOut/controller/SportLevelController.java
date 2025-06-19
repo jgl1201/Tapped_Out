@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -12,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 import java.util.List;
@@ -31,7 +33,7 @@ import com.jgl.TappedOut.dto.SportLevelUpdateDTO;
 @RestController
 @RequestMapping("/sport-level")
 @Tag(name = "SportLevel", description = "API Endpoints for Sport Level management")
-public class SportLevelController {
+public class SportLevelController extends BaseController {
     @Autowired
     private SportLevelService sportLevelService;
 

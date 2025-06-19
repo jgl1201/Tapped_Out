@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 import java.util.List;
@@ -32,7 +33,7 @@ import com.jgl.TappedOut.dto.ResultUpdateDTO;
 @RestController
 @RequestMapping("/results")
 @Tag(name = "Result", description = "Endpoints for Result")
-public class ResultRestController {
+public class ResultRestController extends BaseController {
     @Autowired
     private ResultService resultService;
 
