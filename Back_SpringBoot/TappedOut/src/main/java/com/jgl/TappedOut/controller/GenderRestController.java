@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class GenderRestController {
      * @return List of GenderResponseDTO
      */
     @GetMapping({"", "/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves all genders",
         responses = {
@@ -71,6 +73,7 @@ public class GenderRestController {
      * @throws EntityNotFoundException if gender not found
      */
     @GetMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves a specific Gender by ID",
         parameters = {
@@ -111,6 +114,7 @@ public class GenderRestController {
      * @throws EntityNotFoundException if gender not found
      */
     @GetMapping({"/name/{name}", "/name/{name}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves a specific Gender by NAME",
         parameters = {
@@ -152,6 +156,7 @@ public class GenderRestController {
      * @throws RuntimeException if gender creation fails
      */
     @PostMapping({"", "/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Creates a new Gender",
         responses = {
@@ -198,6 +203,7 @@ public class GenderRestController {
      * @throws RuntimeException if gender update fails
      */
     @PutMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Updates a specific Gender by ID",
         parameters = {
@@ -250,6 +256,7 @@ public class GenderRestController {
      * @throws RuntimeException if gender deletion fails
      */
     @DeleteMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Deletes a specific Gender by ID",
         parameters = {
