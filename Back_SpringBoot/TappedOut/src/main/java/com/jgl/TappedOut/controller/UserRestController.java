@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import jakarta.validation.Valid;
 
 import java.util.List;
 
+import com.jgl.TappedOut.service.PermissionsService;
 import com.jgl.TappedOut.service.UserService;
 import com.jgl.TappedOut.dto.UserResponseDTO;
 import com.jgl.TappedOut.dto.UserCreateDTO;
@@ -35,6 +37,10 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
+    @SuppressWarnings("unused")
+    @Autowired
+    private PermissionsService permissionsService;
+
     /**
      * GET /api/tappedout/user    
      * Retrieves all users
@@ -42,6 +48,7 @@ public class UserRestController {
      * @return List of UserResponseDTO
      */
     @GetMapping({"", "/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves all users",
         responses = {
@@ -73,6 +80,7 @@ public class UserRestController {
      * @throws EntityNotFoundException if user type not found
      */
     @GetMapping({"/type/{typeId}", "/type/{typeId}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Retrieves all users for a specific user type",
         parameters = {
@@ -113,6 +121,7 @@ public class UserRestController {
      * @throws EntityNotFoundException if gender not found
      */
     @GetMapping({"/gender/{genderId}", "/gender/{genderId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves all users for a specific gender",
         parameters = {
@@ -154,6 +163,7 @@ public class UserRestController {
      * @throws EntityNotFoundException if location not found
      */
     @GetMapping({"/location", "/location/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Retrieves all users for a specific location",
         parameters = {
@@ -188,6 +198,7 @@ public class UserRestController {
      * @return List of UserResponseDTO
      */
     @GetMapping({"/search", "/search/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves all users by name or email",
         parameters = {
@@ -222,6 +233,7 @@ public class UserRestController {
      * @throws EntityNotFoundException if user not found
      */
     @GetMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR')")
     @Operation(
         summary = "Retrieves a user by ID",
         parameters = {
@@ -262,6 +274,7 @@ public class UserRestController {
      * @throws EntityNotFoundException if user not found
      */
     @GetMapping({"/dni/{dni}", "/dni/{dni}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Retrieves a user by DNI",
         parameters = {
@@ -302,6 +315,7 @@ public class UserRestController {
      * @throws EntityNotFoundException if user not found
      */
     @GetMapping({"/email/{email}", "/email/{email}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Retrieves a user by EMAIL",
         parameters = {
@@ -389,6 +403,7 @@ public class UserRestController {
      * @throws RuntimeException if user update fails
      */
     @PutMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("@permissionsService.canEditUser(#id)")
     @Operation(
         summary = "Updates a user basic information",
         parameters = {
@@ -443,6 +458,7 @@ public class UserRestController {
      * @throws RuntimeException if user update fails
      */
     @PatchMapping({"/{id}/security", "/{id}/security/"})
+    @PreAuthorize("@permissionsService.canEditUser(#id)")
     @Operation(
         summary = "Updates user authentication information",
         parameters = {
@@ -495,6 +511,7 @@ public class UserRestController {
      * @throws RuntimeException if user deletion fails
      */
     @DeleteMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Deletes a user by ID",
         parameters = {
