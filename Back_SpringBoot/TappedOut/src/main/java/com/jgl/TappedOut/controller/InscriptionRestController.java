@@ -1,6 +1,7 @@
 package com.jgl.TappedOut.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,11 @@ import jakarta.validation.Valid;
 
 import java.util.List;
 
-import com.jgl.TappedOut.service.InscriptionService;
-import com.jgl.TappedOut.dto.InscriptionResponseDTO;
 import com.jgl.TappedOut.dto.InscriptionCreateDTO;
+import com.jgl.TappedOut.dto.InscriptionResponseDTO;
 import com.jgl.TappedOut.dto.InscriptionUpdateDTO;
 import com.jgl.TappedOut.models.PaymentStatus;
+import com.jgl.TappedOut.service.*;
 
 /**
  * Controller to define endpoints for Inscription
@@ -35,6 +36,10 @@ public class InscriptionRestController {
     @Autowired
     private InscriptionService inscriptionService;
 
+    @SuppressWarnings("unused")
+    @Autowired
+    private PermissionsService permissionsService;
+
     /**
      * GET /api/tappedout/inscription
      * Retrieves all inscriptions
@@ -42,6 +47,7 @@ public class InscriptionRestController {
      * @return List of InscriptionResponseDTO
      */
     @GetMapping({"", "/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Retrieves all inscriptions",
         responses = {
@@ -73,6 +79,7 @@ public class InscriptionRestController {
      * @throws EntityNotFoundException if competitor not found
      */
     @GetMapping({"/competitor/{competitorId}", "/competitor/{competitorId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'COMPETITOR') and @permissionsService.canSeeCompetitorInscriptions(#competitorId)")
     @Operation(
         summary = "Retrieves inscriptions by competitor ID",
         parameters = {
@@ -113,6 +120,7 @@ public class InscriptionRestController {
      * @throws EntityNotFoundException if event not found
      */
     @GetMapping({"/event/{eventId}", "/event/{eventId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER') and @permissionsService.canSeeInscriptions(#eventId)")
     @Operation(
         summary = "Retrieves inscriptions by event ID",
         parameters = {
@@ -154,6 +162,7 @@ public class InscriptionRestController {
      * @throws EntityNotFoundException if event or category not found
      */
     @GetMapping({"/event/{eventId}/category/{categoryId}", "/event/{eventId}/category/{categoryId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER') and @permissionsService.canSeeInscriptions(#eventId, #categoryId)")
     @Operation(
         summary = "Retrieves inscriptions by event and category ID",
         parameters = {
@@ -194,6 +203,7 @@ public class InscriptionRestController {
      * @return List of InscriptionResponseDTO
      */
     @GetMapping({"/status/{status}", "/status/{status}/"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Retrieves inscriptions by payment status",
         parameters = {
@@ -228,6 +238,7 @@ public class InscriptionRestController {
      * @throws EntityNotFoundException if event not found
      */
     @GetMapping({"/event/{eventId}/paid", "/event/{eventId}/paid/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER') and @permissionsService.canSeeInscriptions(#eventId)")
     @Operation(
         summary = "Retrieves paid inscriptions for an event",
         parameters = {
@@ -268,6 +279,7 @@ public class InscriptionRestController {
      * @throws EntityNotFoundException if event not found
      */
     @GetMapping({"/event/{eventId}/paid/count", "/event/{eventId}/paid/count/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER') and @permissionsService.canSeeInscriptions(#eventId)")
     @Operation(
         summary = "Counts paid inscriptions for an event",
         parameters = {
@@ -304,6 +316,7 @@ public class InscriptionRestController {
      * @throws EntityNotFoundException if inscription not found
      */
     @GetMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'COMPETITOR') and @permissionsService.canSeeCompetitorInscriptions(#competitorId)")
     @Operation(
         summary = "Retrieves an inscription by ID",
         parameters = {
@@ -345,6 +358,7 @@ public class InscriptionRestController {
      * @throws EntityNotFoundException if competitor or event not found
      */
     @GetMapping({"/competitor/{competitorId}/event/{eventId}", "/competitor/{competitorId}/event/{eventId}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'COMPETITOR') and (@permissionsService.canSeeInscriptions(#eventId) or @permissionsService.canSeeCompetitorInscriptions(#competitorId))")
     @Operation(
         summary = "Retrieves inscriptions by competitor and event",
         parameters = {
@@ -387,6 +401,7 @@ public class InscriptionRestController {
      * @throws IllegalArgumentException if user already inscribed or incompatible with category
      */
     @PostMapping({"", "/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'COMPETITOR')")
     @Operation(
         summary = "Creates a new inscription",
         responses = {
@@ -432,6 +447,7 @@ public class InscriptionRestController {
      * @throws IllegalArgumentException if competitor incompatible with category
      */
     @PutMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'COMPETITOR') and @permissionsService.canUpdateInscription(#id)")
     @Operation(
         summary = "Updates an inscription",
         parameters = {
@@ -477,6 +493,7 @@ public class InscriptionRestController {
      * @throws EntityNotFoundException if inscription not found
      */
     @DeleteMapping({"/{id}", "/{id}/"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'COMPETITOR') and @permissionsService.canDeleteInscription(#id)")
     @Operation(
         summary = "Deletes an inscription",
         parameters = {
