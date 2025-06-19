@@ -37,7 +37,7 @@ import jakarta.validation.Valid;
  * @since 2025
  */
 @RestController
-@RequestMapping("/api/tappedout/auth")
+@RequestMapping("/auth")
 @CrossOrigin(origins = "*")
 public class AuthRestController {
     @Autowired
