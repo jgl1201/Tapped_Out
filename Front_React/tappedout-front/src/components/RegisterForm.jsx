@@ -78,9 +78,6 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                 }}
             >
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                    <IconButton onClick={() => navigate(-1)} sx={{ color: '#aaa', mr: 1 }}>
-                        <BackIcon />
-                    </IconButton>
                     <Typography
                         variant="h4"
                         sx={{ 
