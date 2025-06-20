@@ -13,27 +13,27 @@ USE tapped_out;
 
 -- Tabla de GÉNEROS
 CREATE TABLE IF NOT EXISTS genders (
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(50) NOT NULL UNIQUE
 ) ENGINE=InnoDB;
 
 -- Tabla de TIPOS DE USUARIOS
 CREATE TABLE IF NOT EXISTS user_types(
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(50) NOT NULL UNIQUE
 ) ENGINE=InnoDB;
 
 -- Tabla de USUARIOS
 CREATE TABLE IF NOT EXISTS users (
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
 	dni VARCHAR(20) NOT NULL UNIQUE,
-	type_id INT NOT NULL,
+	type_id BIGINT NOT NULL,
 	email VARCHAR(255) NOT NULL UNIQUE,
 	password_hash VARCHAR(255) NOT NULL,
 	first_name VARCHAR(100) NOT NULL,
 	last_name VARCHAR(100) NOT NULL,
 	date_of_birth DATE NOT NULL,
-	gender_id INT NOT NULL,
+	gender_id BIGINT NOT NULL,
 	country VARCHAR(100) NOT NULL,
 	city VARCHAR(100) NOT NULL,
 	phone INT(20),
@@ -50,14 +50,14 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Tabla de DEPORTES
 CREATE TABLE IF NOT EXISTS sports (
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(100) NOT NULL UNIQUE
 ) ENGINE=InnoDB;
 
 -- Tabla de NIVELES DEPORTIVOS
 CREATE TABLE IF NOT EXISTS sport_levels (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	sport_id INT NOT NULL,
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	sport_id BIGINT NOT NULL,
 	name VARCHAR(100) NOT NULL,
 	
 	FOREIGN KEY (sport_id) REFERENCES sports(id),
@@ -67,15 +67,15 @@ CREATE TABLE IF NOT EXISTS sport_levels (
 
 -- Tabla de CATEGORÍAS
 CREATE TABLE IF NOT EXISTS categories (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	sport_id INT NOT NULL,
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	sport_id BIGINT NOT NULL,
 	name VARCHAR(100) NOT NULL,
 	min_age INT,
 	max_age INT,
 	min_weight DECIMAL(5,2),
 	max_weight DECIMAL(5,2),
-	gender_id INT NOT NULL,
-	level_id INT,
+	gender_id BIGINT NOT NULL,
+	level_id BIGINT,
 	
 	FOREIGN KEY (sport_id) REFERENCES sports(id),
 	FOREIGN KEY (gender_id) REFERENCES genders(id),
@@ -84,9 +84,9 @@ CREATE TABLE IF NOT EXISTS categories (
 
 -- Tabla de EVENTOS
 CREATE TABLE IF NOT EXISTS events (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	sport_id INT NOT NULL,
-	organizer_id INT NOT NULL,
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	sport_id BIGINT NOT NULL,
+	organizer_id BIGINT NOT NULL,
 	name VARCHAR(255) NOT NULL,
 	description TEXT,
 	start_date DATETIME NOT NULL,
@@ -105,8 +105,8 @@ CREATE TABLE IF NOT EXISTS events (
 
 -- Tabla de CATEGORÍAS POR EVENTO (relación muchos a muchos entre eventos y categorías)
 CREATE TABLE IF NOT EXISTS event_categories (
-	event_id INT NOT NULL,
-	category_id INT NOT NULL,
+	event_id BIGINT NOT NULL,
+	category_id BIGINT NOT NULL,
 	
 	PRIMARY KEY (event_id, category_id),
 	
@@ -116,10 +116,10 @@ CREATE TABLE IF NOT EXISTS event_categories (
 
 -- Tabla de INSCRIPCIONES
 CREATE TABLE IF NOT EXISTS inscriptions (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	competitor_id INT NOT NULL,
-	event_id INT NOT NULL,
-	category_id INT NOT NULL,
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	competitor_id BIGINT NOT NULL,
+	event_id BIGINT NOT NULL,
+	category_id BIGINT NOT NULL,
 	register_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	payment_status ENUM('PENDING', 'PAID', 'CANCELLED') DEFAULT 'PENDING',
 	
@@ -130,10 +130,10 @@ CREATE TABLE IF NOT EXISTS inscriptions (
 
 -- Tabla de RESULTADOS
 CREATE TABLE IF NOT EXISTS results (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	event_id INT NOT NULL,
-	category_id INT NOT NULL,
-	competitor_id INT NOT NULL,
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	event_id BIGINT NOT NULL,
+	category_id BIGINT NOT NULL,
+	competitor_id BIGINT NOT NULL,
 	position INT NOT NULL,
    	notes TEXT,
    	
