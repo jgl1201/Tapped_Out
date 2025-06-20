@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { toast } from 'react-hot-toast';
+import { toast } from 'react-toastify';
 
 const API_BASE_URL = 'http://localhost:9000';
 

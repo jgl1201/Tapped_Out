@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-catch */
 import apiClient from "../api/apiClient";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 const inscriptionService = {
     getAllInscriptions: async () => {
