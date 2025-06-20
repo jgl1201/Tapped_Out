@@ -98,10 +98,6 @@ const LoginForm = ({ onSuccessRedirect = "/"}) => {
                                 minLength: {
                                     value: 8,
                                     message: 'Min 8 characters'
-                                },
-                                pattern: {
-                                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
-                                    message: '1 upper, 1 lower, 1 number'
                                 }
                             })}
                             error={!!errors.password}
