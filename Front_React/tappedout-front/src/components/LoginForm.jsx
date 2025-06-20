@@ -44,7 +44,6 @@ const LoginForm = ({ onSuccessRedirect = "/"}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 minHeight: '100vh',
-                minWidth: '100vh',
                 px: 2
             }}
         >
