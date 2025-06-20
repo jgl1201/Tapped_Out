@@ -40,11 +40,17 @@ apiClient.interceptors.response.use(
                 window.location.href = '/login';
         }
 
+        if (error.response.status === 400)
+            toast.error(error.response.data.message || 'Validation error.');
+
         if (error.response.status === 403)
             toast.error(error.response.data.message || 'You are not authorized to perform this action.');
 
         if (error.response.status === 404)
             toast.error(error.response.data.message || 'Resource not found.');
+
+        if (error.response.status === 409)
+            toast.error(error.response.data.message || 'Resource already exists.');
 
         if (error.response.status === 500)
             toast.error(error.response.data.message || 'Something went wrong. Please try again.');
