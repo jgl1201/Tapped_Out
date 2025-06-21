@@ -1,5 +1,5 @@
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { AppBar, Box, Button, Toolbar, styled } from '@mui/material';
+import { AppBar, Box, Button, Toolbar, Typography, styled } from '@mui/material';
 
 import { authService } from '../service/authService';
 import logo from '../assets/TappedOut_Full-logo.png';
@@ -113,12 +113,15 @@ const Header = () => {
                         </SecondaryButton>
                         </>
                     ) : (
-                        <SecondaryButton 
-                        onClick={handleLogout}
-                        sx={{ textTransform: 'none' }}
-                        >
-                        Logout
-                        </SecondaryButton>
+                        <>
+                            <Typography variant="body1" sx={{ mr: 2 }}>{authService.getCurrentUser().firstName}</Typography>
+                            <SecondaryButton 
+                                onClick={handleLogout}
+                                sx={{ textTransform: 'none' }}
+                            >
+                            Logout
+                            </SecondaryButton>
+                        </>
                     )}
                 </Box>
             </Toolbar>
