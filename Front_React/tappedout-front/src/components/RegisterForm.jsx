@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
+import { toast } from 'react-toastify';
 
 import { TextField, Button, Box, Typography, Paper, Link, Grid, IconButton, InputAdornment, InputLabel, MenuItem, Select, FormControl } from '@mui/material';
-import { Visibility, VisibilityOff, PersonAdd as RegisterIcon, ArrowBack as BackIcon } from '@mui/icons-material';
+import { Visibility, VisibilityOff, PersonAdd as RegisterIcon } from '@mui/icons-material';
 
 import { authService } from '../service/authService';
 import LoadingSpinner from './LoadingSpiner';
@@ -34,19 +34,23 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
         setLoading(true);
         try {
             await authService.register(data);
-            toast.success('Registration successful! Please log in.', {
-                style: {
-                    background: '#4a148c',
-                    color: '#fff'
-                }
-            }); 
+            toast.success('Registration successful, please Login!', {
+                position: 'top-center',
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: false
+            });
             navigate(onSuccessRedirect);
         } catch (error) {
             toast.error(error?.response?.data?.message || 'Registration failed. Please try again.', {
-                style: {
-                    background: '#d32f2f',
-                    color: '#fff'
-                }
+                position: 'top-center',
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: false
             });
         } finally {
             setLoading(false);
@@ -63,7 +67,6 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 minHeight: '100vh',
-                minWidth: '100vh',
                 px: 2
             }}
         >
@@ -77,23 +80,18 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                     backgroundColor: '#161b22'
                 }}
             >
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                    <Typography
-                        variant="h4"
-                        sx={{ 
-                            color: '#ffffff',
-                            flexGrow: 1,
-                            textAlign: 'center'
-                        }}
-                    >
-                        Create Account
-                    </Typography>
-                </Box>
+                <Typography
+                    variant="h4"
+                    align="center"
+                    gutterBottom
+                    sx={{ color: '#ffffff', mb: 4 }}
+                >
+                    Create Account
+                </Typography>
 
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                         <Grid container spacing={2}>
-                            {/* First Name */}
                             <Grid item xs={12} md={6}>
                                 <TextField
                                     label="First Name"
@@ -115,7 +113,6 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                                 />
                             </Grid>
 
-                            {/* Last Name */}
                             <Grid item xs={12} md={6}>
                                 <TextField
                                     label="Last Name"
@@ -137,7 +134,6 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                                 />
                             </Grid>
 
-                            {/* Email */}
                             <Grid item xs={12}>
                                 <TextField
                                     label="Email"
@@ -159,7 +155,6 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                                 />
                             </Grid>
 
-                            {/* Password */}
                             <Grid item xs={12}>
                                 <TextField
                                     label="Password"
@@ -199,7 +194,6 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                                 />
                             </Grid>
 
-                            {/* ID Document */}
                             <Grid item xs={12} md={6}>
                                 <TextField
                                     label="ID Document"
@@ -221,7 +215,6 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                                 />
                             </Grid>
 
-                            {/* Phone */}
                             <Grid item xs={12} md={6}>
                                 <TextField
                                     label="Phone (optional)"
@@ -280,7 +273,6 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                                 </FormControl>
                             </Grid>
 
-                            {/* Country */}
                             <Grid item xs={12} md={6}>
                                 <TextField
                                     label="Country"
@@ -298,7 +290,6 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                                 />
                             </Grid>
 
-                            {/* City */}
                             <Grid item xs={12} md={6}>
                                 <TextField
                                     label="City"
@@ -323,7 +314,7 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                             size="large"
                             startIcon={<RegisterIcon />}
                             sx={{
-                                mt: 2,
+                                mt: 1,
                                 py: 1.5,
                                 background: 'linear-gradient(90deg, #6a1b9a, #8e24aa)',
                                 fontWeight: 'bold',
@@ -335,7 +326,7 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                             Register
                         </Button>
 
-                        <Typography align="center" sx={{ color: '#aaa', mt: 1 }}>
+                        <Typography align="center" sx={{ color: '#aaa', mt: 2 }}>
                             Already have an account?{' '}
                             <Link
                                 component={RouterLink}
