@@ -229,48 +229,68 @@ const RegisterForm = ({ onSuccessRedirect = "/login"}) => {
                                 />
                             </Grid>
 
-                            {/* Date of Birth */}
-                            <Grid item xs={12} md={6}>
-                                <TextField
-                                    label="Date of Birth"
-                                    type="date"
-                                    fullWidth
-                                    variant="outlined"
-                                    InputLabelProps={{ shrink: true }}
-                                    {...register('dateOfBirth', {
-                                        required: 'Date of birth is required'
-                                    })}
-                                    error={!!errors.dateOfBirth}
-                                    helperText={errors.dateOfBirth?.message}
-                                    sx={{
-                                        input: { color: '#ffffff' },
-                                        label: { color: '#aaa' }
-                                    }}
-                                />
-                            </Grid>
-
-                            {/* User Type */}
-                            <Grid item xs={12} md={6}>
-                                <FormControl fullWidth>
-                                    <InputLabel sx={{ color: '#aaa' }}>User Type</InputLabel>
-                                    <Select
-                                        label="User Type"
-                                        {...register('userType')}
-                                        defaultValue="COMPETITOR"
-                                        sx={{ 
-                                            color: '#ffffff',
-                                            '.MuiOutlinedInput-notchedOutline': {
-                                                borderColor: '#444'
-                                            },
-                                            '&:hover .MuiOutlinedInput-notchedOutline': {
-                                                borderColor: '#666'
+                            <Grid item xs={12} md={12}>
+                                <Box sx={{ display: 'flex', gap: 2, minWidth: 0 }}>
+                                    <Box sx={{ flex: 1, minWidth: 0 }}>
+                                        <TextField
+                                            label="Date of Birth"
+                                            type="date"
+                                            fullWidth
+                                            variant="outlined"
+                                            InputLabelProps={{ shrink: true }}
+                                            {...register('dateOfBirth', {
+                                            required: 'Date of birth is required'
+                                            })}
+                                            error={!!errors.dateOfBirth}
+                                            helperText={errors.dateOfBirth?.message}
+                                            sx={{
+                                            '& .MuiInputBase-input': { color: '#ffffff', padding: '16.5px 14px' },
+                                            label: { color: '#aaa' },
+                                            '& .MuiOutlinedInput-root': {
+                                                '& fieldset': { borderColor: '#444' },
+                                                '&:hover fieldset': { borderColor: '#666' }
                                             }
-                                        }}
-                                    >
-                                        <MenuItem value="COMPETITOR">Competitor</MenuItem>
-                                        <MenuItem value="ORGANIZER">Organizer</MenuItem>
-                                    </Select>
-                                </FormControl>
+                                            }}
+                                        />
+                                    </Box>
+
+                                    <Box sx={{ flex: 1, minWidth: 0 }}>
+                                        <FormControl fullWidth>
+                                            <InputLabel sx={{ color: '#aaa' }}>User Type</InputLabel>
+                                            <Select
+                                            label="User Type"
+                                            defaultValue="COMPETITOR"
+                                            {...register('userType')}
+                                            sx={{
+                                                color: '#ffffff',
+                                                '.MuiOutlinedInput-notchedOutline': { borderColor: '#444' },
+                                                '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#666' }
+                                            }}
+                                            >
+                                                <MenuItem value="COMPETITOR">Competitor</MenuItem>
+                                                <MenuItem value="ORGANIZER">Organizer</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+
+                                    <Box sx={{ flex: 1, minWidth: 0 }}>
+                                        <FormControl fullWidth>
+                                            <InputLabel sx={{ color: '#aaa' }}>Gender</InputLabel>
+                                            <Select
+                                            label="Gender"
+                                            {...register('genderId', { required: 'Gender is required' })}
+                                            sx={{
+                                                color: '#ffffff',
+                                                '.MuiOutlinedInput-notchedOutline': { borderColor: '#444' },
+                                                '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#666' }
+                                            }}
+                                            >
+                                                <MenuItem value={1}>Male</MenuItem>
+                                                <MenuItem value={2}>Female</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+                                </Box>
                             </Grid>
 
                             <Grid item xs={12} md={6}>
