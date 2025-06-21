@@ -1,4 +1,3 @@
-import React from 'react';
 import { CircularProgress, Box, Typography } from '@mui/material';
 
 const LoadingSpinner = ({ size = 40, text = 'Loading...', thickness = 4 }) => {
