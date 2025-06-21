@@ -5,12 +5,11 @@ import RegisterForm from "./components/RegisterForm";
 import EventDashboard from "./views/event/EventDashboard";
 import CreateEventForm from "./views/event/CreateEventForm";
 
-import Test from "./views/Test";
-
 const AppRoutes = () => {
     return (
         <Routes>
-            <Route path="/" element={<Test />} />
+            // Redirect to event dashboard
+            <Route path="/" element={<Navigate to="/event" />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/event" element={<EventDashboard />} />
