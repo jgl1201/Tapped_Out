@@ -114,7 +114,7 @@ const EventForm = () => {
         try {
             await eventService.createEvent(eventData);
             toast.success("Event created successfully");
-            navigate("/events");
+            navigate("/event");
         } catch (error) {
             toast.error(error?.response?.message || "Error creating event");
         } finally {
