@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
+import { toast } from 'react-toastify';
 
 import { TextField, Button, Box, Typography, Link, Paper, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -25,10 +25,24 @@ const LoginForm = ({ onSuccessRedirect = "/"}) => {
         setLoading(true);
         try {
             await authService.login(data);
-            toast.success('Login successful!');
+            toast.success('Login successful, Welcome Back!', {
+                position: 'top-center',
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: false,
+            });
             navigate(onSuccessRedirect);
         } catch (error) {
-            toast.error(error?.response?.data?.message || 'Login failed. Please try again.');
+            toast.error(error?.response?.data?.message || 'Login failed. Please try again.', {
+                position: 'top-center',
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: false,
+            });
         } finally {
             setLoading(false);
         }
