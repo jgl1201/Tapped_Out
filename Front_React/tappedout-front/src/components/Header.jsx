@@ -1,5 +1,5 @@
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { Button, AppBar, Toolbar, Box, styled } from '@mui/material';
+import { AppBar, Box, Button, Toolbar, styled } from '@mui/material';
 import { authService } from '../service/authService';
 
 const PrimaryButton = styled(Button)({

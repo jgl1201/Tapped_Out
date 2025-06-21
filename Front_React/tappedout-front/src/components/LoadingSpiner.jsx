@@ -1,4 +1,4 @@
-import { CircularProgress, Box, Typography } from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 
 const LoadingSpinner = ({ size = 40, text = 'Loading...', thickness = 4 }) => {
     return (

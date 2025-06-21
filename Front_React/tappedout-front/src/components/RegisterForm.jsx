@@ -3,7 +3,7 @@ import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { TextField, Button, Box, Typography, Paper, Link, Grid, IconButton, InputAdornment, InputLabel, MenuItem, Select, FormControl } from '@mui/material';
+import { Button, Box, FormControl, Grid, IconButton, InputAdornment, InputLabel, Link, MenuItem, Paper, Select, TextField, Typography } from '@mui/material';
 import { Visibility, VisibilityOff, PersonAdd as RegisterIcon } from '@mui/icons-material';
 
 import { authService } from '../service/authService';
