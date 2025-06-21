@@ -108,7 +108,7 @@ public class AuthRestController {
             String userType = dto.getUserType().trim().toUpperCase() != null ?
                 dto.getUserType().trim().toUpperCase() : "COMPETITOR"; // Default user type is competitor
 
-            if (!"COMPETITOR".equals(userType))
+            if (!"COMPETITOR".equals(userType) && !"ORGANIZER".equals(userType))
                 return ResponseEntity.status(400).body("That user type needs to be registered by a ADMIN");
 
             User user = new User();
