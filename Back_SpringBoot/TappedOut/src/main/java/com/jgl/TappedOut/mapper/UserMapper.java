@@ -6,6 +6,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.jgl.TappedOut.dto.UserCreateDTO;
 import com.jgl.TappedOut.dto.UserResponseDTO;
@@ -17,7 +18,7 @@ import com.jgl.TappedOut.models.User;
  * Handles mapping including validations after it.
  * 
  * @author Jorge García López
- * @version 1.0
+ * @version 1.1
  * @since 2025
  */
 @Mapper(componentModel = "spring",
@@ -26,6 +27,9 @@ import com.jgl.TappedOut.models.User;
 public abstract class UserMapper {
     @Autowired
     protected MapperUtils mapperUtils;
+
+    @Autowired
+    protected PasswordEncoder passwordEncoder;
 
     /**
      * Method to convert {@link UserCreateDTO} into a {@link User}
@@ -80,12 +84,12 @@ public abstract class UserMapper {
             mapperUtils.validateUserUniqueFields(entity.getDni(), dto.getEmail());
 
         entity.setEmail(dto.getEmail());
-        entity.setPasswordHash(mapperUtils.encodePassword(dto.getNewPassword()));
+        entity.setPasswordHash(passwordEncoder.encode(dto.getNewPassword()));
     }
 
     @AfterMapping
     protected void validateUser(UserCreateDTO dto, @MappingTarget User user) {
         mapperUtils.validateUserUniqueFields(dto.getDni(), dto.getEmail());
-        user.setPasswordHash(mapperUtils.encodePassword(dto.getPassword()));
+        user.setPasswordHash(passwordEncoder.encode(dto.getPassword()));
     }
 }

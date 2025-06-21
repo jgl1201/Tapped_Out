@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.jgl.TappedOut.models.*;
@@ -17,7 +15,7 @@ import jakarta.persistence.EntityNotFoundException;
  * Utility class with common mapper operations
  * 
  * @author Jorge García López
- * @version 1.0.7
+ * @version 1.1
  * @since 2025
  */
 @Component
@@ -47,9 +45,6 @@ public class MapperUtils {
 
     @Autowired
     private UserTypeRepository userTypeRepo;
-
-    // * Password Encoder from Spring Security
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     // * Finding methods
 
@@ -277,10 +272,5 @@ public class MapperUtils {
 
         if (userRepo.existsByEmailIgnoreCase(email))
             throw new IllegalArgumentException("Email: " + email + " already exists");
-    }
-
-    // TODO: Research and extract into a bean, then inject that bean here and manage encodig logic
-    public String encodePassword(String plainPassword) {
-        return passwordEncoder.encode(plainPassword);
     }
 }
