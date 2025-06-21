@@ -72,7 +72,6 @@ const Header = () => {
                 gridTemplateColumns: '1fr auto 1fr',
                 alignItems: 'center'
             }}>
-                {/* Logo - Izquierda */}
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
                     <Logo 
                         src={logo}
@@ -81,7 +80,6 @@ const Header = () => {
                     />
                 </Box>
 
-                {/* Navegación Central */}
                 <Box sx={{ 
                     display: 'flex', 
                     alignItems: 'center',
@@ -94,10 +92,8 @@ const Header = () => {
                     >
                         Events
                     </NavLink>
-                    {/* Aquí puedes añadir más enlaces de navegación */}
                 </Box>
 
-                {/* Botones de autenticación - Derecha */}
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
                     {!isAuthenticated ? (
                         <>
