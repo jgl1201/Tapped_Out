@@ -1,6 +1,8 @@
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { AppBar, Box, Button, Toolbar, styled } from '@mui/material';
+
 import { authService } from '../service/authService';
+import logo from '../assets/TappedOut_Full-logo.png';
 
 const PrimaryButton = styled(Button)({
     background: 'linear-gradient(90deg, #6a1b9a, #8e24aa)',
@@ -25,12 +27,34 @@ const SecondaryButton = styled(Button)({
     }
 });
 
+const Logo = styled('img')({
+    height: '80px',
+    width: 'auto',
+    cursor: 'pointer'
+});
+
+const NavLink = styled(Button)({
+    color: '#fff',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    textTransform: 'none',
+    padding: '8px 16px',
+    borderRadius: '4px',
+    '&:hover': {
+        background: 'rgba(255, 255, 255, 0.1)',
+    }
+});
+
 const Header = () => {
     const navigate = useNavigate();
     const isAuthenticated = authService.isAuthenticated();
 
     const handleLogout = () => {
         authService.logout();
+        navigate('/');
+    };
+
+    const handleLogoClick = () => {
         navigate('/');
     };
 
@@ -41,12 +65,40 @@ const Header = () => {
                 backgroundColor: '#161b22',
                 boxShadow: 'none',
                 borderBottom: '1px solid #30363d',
-                display: 'flex',
-                justifyContent: 'space-between',
             }}
         >
-            <Toolbar sx={{ justifyContent: 'flex-end' }}>
-                <Box>
+            <Toolbar sx={{ 
+                display: 'grid', 
+                gridTemplateColumns: '1fr auto 1fr',
+                alignItems: 'center'
+            }}>
+                {/* Logo - Izquierda */}
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                    <Logo 
+                        src={logo}
+                        alt="Logo"
+                        onClick={handleLogoClick}
+                    />
+                </Box>
+
+                {/* Navegación Central */}
+                <Box sx={{ 
+                    display: 'flex', 
+                    alignItems: 'center',
+                    gap: 2,
+                    justifyContent: 'center'
+                }}>
+                    <NavLink 
+                        component={RouterLink} 
+                        to="/event"
+                    >
+                        Events
+                    </NavLink>
+                    {/* Aquí puedes añadir más enlaces de navegación */}
+                </Box>
+
+                {/* Botones de autenticación - Derecha */}
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
                     {!isAuthenticated ? (
                         <>
                         <PrimaryButton 
