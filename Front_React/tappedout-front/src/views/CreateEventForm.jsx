@@ -13,7 +13,7 @@ import sportService from "../service/sportService";
 import categoryService from "../service/categoryService";
 import eventService from "../service/eventService";
 import { authService } from '../service/authService';
-import LoadingSpinner from "./LoadingSpiner";
+import LoadingSpinner from "../components/LoadingSpiner";
 
 const EventForm = () => {
     const navigate = useNavigate();

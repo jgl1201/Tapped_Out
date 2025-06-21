@@ -2,9 +2,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
-import CreateEventForm from "./components/CreateEventForm";
+import CreateEventForm from "./views/CreateEventForm";
 
-import Test from "./Test";
+import Test from "./views/Test";
 
 const AppRoutes = () => {
     return (
