@@ -9,11 +9,11 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
-import sportService from "../service/sportService";
-import categoryService from "../service/categoryService";
-import eventService from "../service/eventService";
-import { authService } from '../service/authService';
-import LoadingSpinner from "../components/LoadingSpiner";
+import sportService from "../../service/sportService";
+import categoryService from "../../service/categoryService";
+import eventService from "../../service/eventService";
+import { authService } from '../../service/authService';
+import LoadingSpinner from "../../components/LoadingSpiner";
 
 const EventForm = () => {
     const navigate = useNavigate();
