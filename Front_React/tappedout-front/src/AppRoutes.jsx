@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
+import ConditionalRedirect from "./components/ConditionalRedirect";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 
@@ -11,10 +12,12 @@ import EventModifyForm from "./views/event/EventMoifyForm";
 import InscriptionsDashboard from "./views/inscription/InscriptionDashboard";
 import InscriptionForm from "./views/inscription/InscriptionForm";
 
+import AdminDashboard from "./views/admin/AdminDashboard";
+
 const AppRoutes = () => {
     return (
         <Routes>
-            <Route path="/" element={<Navigate to="/event" />} />
+            <Route path="/" element={<ConditionalRedirect />} />
 
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
@@ -26,6 +29,8 @@ const AppRoutes = () => {
             <Route path="/event/:id/register" element={<InscriptionForm />} />
 
             <Route path="/inscription" element={<InscriptionsDashboard />} />
+
+            <Route path="/admin" element={<AdminDashboard />} />
 
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
