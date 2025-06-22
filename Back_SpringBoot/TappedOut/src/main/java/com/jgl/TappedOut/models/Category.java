@@ -41,10 +41,10 @@ public class Category {
     private String name;
 
     @Column(name = "min_age")
-    private Integer minAge;
+    private Integer minAge = 0;
 
     @Column(name = "max_age")
-    private Integer maxAge;
+    private Integer maxAge = 100;
 
     @Column(name = "min_weight", precision = 5, scale = 2)
     private BigDecimal minWeight;

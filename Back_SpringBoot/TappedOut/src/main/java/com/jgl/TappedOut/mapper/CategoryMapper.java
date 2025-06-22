@@ -76,7 +76,7 @@ public abstract class CategoryMapper {
      */
     @AfterMapping
     protected void validateRanges(@MappingTarget Category category) {
-        mapperUtils.validateAgeRanges(category.getMinAge(), category.getMaxAge());
+        mapperUtils.validateAgeRanges(category.getMinAge() != null ? category.getMinAge() : 0, category.getMaxAge() != null ? category.getMaxAge() : 100);
         mapperUtils.validateWeightRanges(category.getMinWeight(), category.getMaxWeight());
     }
 }

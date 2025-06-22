@@ -372,7 +372,7 @@ public class InscriptionServiceImpl implements InscriptionService {
 
         int age = Period.between(competitor.getDateOfBirth(), LocalDate.now()).getYears();
 
-        if (age < category.getMinAge() || age > category.getMaxAge())
+        if (age < (category.getMinAge() != null ? category.getMinAge() : 0) || age > (category.getMaxAge() != null ? category.getMaxAge() : 100))
             throw new IllegalArgumentException("Competitor AGE is not compatible with category");
     }
 }
