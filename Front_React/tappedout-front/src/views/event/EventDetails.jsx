@@ -22,8 +22,6 @@ const EventDetails = () => {
         try {
             setLoading(true);
             const response = await eventService.getEventById(id);
-            console.log('EVENT', response);
-            console.log('EVENT ORGANIZER ID:', response.organizer.id); // Debug
             setEvent(response);
         } catch (error) {
             toast.error(error?.response?.message || "Error loading event details");
@@ -35,7 +33,6 @@ const EventDetails = () => {
 
     useEffect(() => {
         const currentUser = authService.getCurrentUser();
-        console.log('CURRENT USER:', currentUser); // Debug
         setUser(currentUser);
         loadEventDetails();
     }, [loadEventDetails]);
@@ -108,20 +105,6 @@ const EventDetails = () => {
     );
     
     const canDelete = canEdit;
-
-    // Debug logs
-    console.log('Permission Debug:', {
-        user,
-        event: event ? { id: event.id, organizer: event.organizer.id } : null,
-        userRole: authService.getCurrentUserRole(),
-        isAdmin: authService.isAdmin(),
-        isOrganizer: authService.isOrganizer(),
-        isCompetitor: authService.isCompetitor(),
-        isEventOwner,
-        canRegister,
-        canEdit,
-        canDelete
-    });
 
     if (loading) return <LoadingSpinner />;
 
@@ -369,34 +352,6 @@ const EventDetails = () => {
                             </CardContent>
                         </Card>
 
-                        <Card
-                            sx={{
-                                backgroundColor: '#2d1b69',
-                                borderRadius: 3,
-                                mb: 3
-                            }}
-                        >
-                            <CardContent sx={{ p: 3 }}>
-                                <Typography variant="h6" sx={{ color: '#ffffff', mb: 2 }}>
-                                    Debug Info
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: '#aaa', mb: 1 }}>
-                                    User ID: {user?.userId}
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: '#aaa', mb: 1 }}>
-                                    User Role: {authService.getCurrentUserRole()}
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: '#aaa', mb: 1 }}>
-                                    Event Organizer ID: {event?.organizer.id}
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: '#aaa', mb: 1 }}>
-                                    Is Event Owner: {isEventOwner ? 'Yes' : 'No'}
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: '#aaa', mb: 1 }}>
-                                    Can Edit: {canEdit ? 'Yes' : 'No'}
-                                </Typography>
-                            </CardContent>
-                        </Card>
                         <Card
                             sx={{
                                 backgroundColor: '#161b22',
