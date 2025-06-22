@@ -101,7 +101,7 @@ const userService = {
 
     updateUserSecurity: async (id, userSecurityData) => {
         try {
-            const response = await apiClient.put(`/user/${id}/security`, userSecurityData);
+            const response = await apiClient.patch(`/user/${id}/security`, userSecurityData);
             toast.success('User security information updated successfully.');
             return response.data;
         } catch (error) {
