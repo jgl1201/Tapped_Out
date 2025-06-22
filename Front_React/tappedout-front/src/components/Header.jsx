@@ -92,6 +92,13 @@ const Header = () => {
                     >
                         Events
                     </NavLink>
+
+                    <NavLink 
+                        component={RouterLink} 
+                        to="/inscription"
+                    >
+                        Inscriptions
+                    </NavLink>
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
