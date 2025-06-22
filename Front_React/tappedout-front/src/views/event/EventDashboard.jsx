@@ -25,7 +25,6 @@ const EventDashboard = () => {
         try {
             setLoading(true);
             const response = await eventService.getAllEvents();
-            console.log('EVENTS', response);
             
             // Sort events by start date (nearest first)
             const sortedEvents = [...response].sort((a, b) => {
