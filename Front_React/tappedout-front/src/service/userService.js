@@ -111,6 +111,7 @@ const userService = {
 
     deleteUser: async (id) => {
         try {
+            console.log('ID TO DELETE:', id);
             const response = await apiClient.delete(`/user/${id}`);
             toast.success('User deleted successfully.');
             return response.data;

@@ -2,8 +2,6 @@ package com.jgl.TappedOut.dto;
 
 import java.time.LocalDate;
 
-import org.hibernate.validator.constraints.URL;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -42,9 +40,6 @@ public class UserUpdateDTO {
     private String city;
 
     private Integer phone;
-
-    @URL(message = "User's avatar must be an URL")
-    private String avatar;
 
     private Boolean isVerified;
 }

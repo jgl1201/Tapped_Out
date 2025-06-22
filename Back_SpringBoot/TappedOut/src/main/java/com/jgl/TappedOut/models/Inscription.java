@@ -3,6 +3,8 @@ package com.jgl.TappedOut.models;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,14 +40,17 @@ public class Inscription {
 
     @ManyToOne
     @JoinColumn(name = "competitor_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User competitorId;
 
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Event eventId;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Category categoryId;
 
     @CreationTimestamp

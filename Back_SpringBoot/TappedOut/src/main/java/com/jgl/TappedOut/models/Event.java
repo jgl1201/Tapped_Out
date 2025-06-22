@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,10 +42,12 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "sport_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Sport sportId;
 
     @ManyToOne
     @JoinColumn(name = "organizer_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User organizerId;
 
     @Column(name = "name", nullable = false, length = 255)

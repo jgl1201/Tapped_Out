@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,6 +45,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "type_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private UserType typeId;
 
     @Email(message = "User EMAIL must have a VALID FORMAT")
@@ -64,6 +67,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "gender_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Gender genderId;
 
     @Column(name = "country", nullable = false, length = 100)

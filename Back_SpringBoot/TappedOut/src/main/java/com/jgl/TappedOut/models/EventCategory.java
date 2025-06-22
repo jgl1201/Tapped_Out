@@ -1,5 +1,8 @@
 package com.jgl.TappedOut.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -29,10 +32,12 @@ public class EventCategory {
     @Id
     @ManyToOne
     @JoinColumn(name = "event_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Event eventId;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Category categoryId;
 }

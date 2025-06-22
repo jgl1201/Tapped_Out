@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS users (
 	is_verified BOOLEAN DEFAULT FALSE,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	
-	FOREIGN KEY (type_id) REFERENCES user_types(id),
-	FOREIGN KEY (gender_id) REFERENCES genders(id),
+	FOREIGN KEY (type_id) REFERENCES user_types(id) ON DELETE CASCADE,
+	FOREIGN KEY (gender_id) REFERENCES genders(id) ON DELETE CASCADE,
 
 	-- Index para consultas con filtrado mucho mas rapidas
 	INDEX idx_dni (dni)
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS sport_levels (
 	sport_id BIGINT NOT NULL,
 	name VARCHAR(100) NOT NULL,
 	
-	FOREIGN KEY (sport_id) REFERENCES sports(id),
+	FOREIGN KEY (sport_id) REFERENCES sports(id) ON DELETE CASCADE,
 	
 	UNIQUE (sport_id, name)
 ) ENGINE=InnoDB;
@@ -77,9 +77,9 @@ CREATE TABLE IF NOT EXISTS categories (
 	gender_id BIGINT NOT NULL,
 	level_id BIGINT,
 	
-	FOREIGN KEY (sport_id) REFERENCES sports(id),
-	FOREIGN KEY (gender_id) REFERENCES genders(id),
-	FOREIGN KEY (level_id) REFERENCES sport_levels(id)
+	FOREIGN KEY (sport_id) REFERENCES sports(id) ON DELETE CASCADE,
+	FOREIGN KEY (gender_id) REFERENCES genders(id) ON DELETE CASCADE,
+	FOREIGN KEY (level_id) REFERENCES sport_levels(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- Tabla de EVENTOS
@@ -99,8 +99,8 @@ CREATE TABLE IF NOT EXISTS events (
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	registration_fee DECIMAL(10,2),
 	
-	FOREIGN KEY (sport_id) REFERENCES sports(id),
-	FOREIGN KEY (organizer_id) REFERENCES users(id)
+	FOREIGN KEY (sport_id) REFERENCES sports(id) ON DELETE CASCADE,
+	FOREIGN KEY (organizer_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- Tabla de CATEGORÍAS POR EVENTO (relación muchos a muchos entre eventos y categorías)
@@ -110,8 +110,8 @@ CREATE TABLE IF NOT EXISTS event_categories (
 	
 	PRIMARY KEY (event_id, category_id),
 	
-	FOREIGN KEY (event_id) REFERENCES events(id),
-	FOREIGN KEY (category_id) REFERENCES categories(id)
+	FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
+	FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- Tabla de INSCRIPCIONES
@@ -123,9 +123,9 @@ CREATE TABLE IF NOT EXISTS inscriptions (
 	register_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	payment_status ENUM('PENDING', 'PAID', 'CANCELLED') DEFAULT 'PENDING',
 	
-	FOREIGN KEY (competitor_id) REFERENCES users(id),
-	FOREIGN KEY (event_id) REFERENCES events(id),
-	FOREIGN KEY (category_id) REFERENCES categories(id)
+	FOREIGN KEY (competitor_id) REFERENCES users(id) ON DELETE CASCADE,
+	FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
+	FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- Tabla de RESULTADOS
@@ -137,9 +137,9 @@ CREATE TABLE IF NOT EXISTS results (
 	position INT NOT NULL,
    	notes TEXT,
    	
-   	FOREIGN KEY (event_id) REFERENCES events(id),
-   	FOREIGN KEY (category_id) REFERENCES categories(id),
-   	FOREIGN KEY (competitor_id) REFERENCES users(id),
+   	FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
+   	FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
+   	FOREIGN KEY (competitor_id) REFERENCES users(id) ON DELETE CASCADE,
    	
    	UNIQUE (event_id, category_id, competitor_id),
    	UNIQUE (event_id, category_id, position)

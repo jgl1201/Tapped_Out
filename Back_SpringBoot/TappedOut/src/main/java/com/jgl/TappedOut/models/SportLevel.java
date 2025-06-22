@@ -1,5 +1,8 @@
 package com.jgl.TappedOut.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +36,7 @@ public class SportLevel {
 
     @ManyToOne
     @JoinColumn(name = "sport_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Sport sportId;
 
     @Column(name = "name", nullable = false, length = 100)

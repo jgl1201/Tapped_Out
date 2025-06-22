@@ -2,8 +2,6 @@ package com.jgl.TappedOut.dto;
 
 import java.time.LocalDate;
 
-import org.hibernate.validator.constraints.URL;
-
 import com.jgl.TappedOut.models.Gender;
 
 import jakarta.validation.constraints.Email;
@@ -66,7 +64,4 @@ public class UserCreateDTO {
     private String city;
 
     private Integer phone;
-
-    @URL(message = "User's avatar must be an URL")
-    private String avatar;
 }

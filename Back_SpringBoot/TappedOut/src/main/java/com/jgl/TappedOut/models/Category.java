@@ -2,6 +2,9 @@ package com.jgl.TappedOut.models;
 
 import java.math.BigDecimal;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +38,7 @@ public class Category {
 
     @ManyToOne
     @JoinColumn(name = "sport_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Sport sportId;
 
     @Column(name = "name", nullable = false, length = 100)
@@ -54,9 +58,11 @@ public class Category {
 
     @ManyToOne
     @JoinColumn(name = "gender_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Gender genderId;
 
     @ManyToOne
     @JoinColumn(name = "level_id")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private SportLevel levelId;
 }

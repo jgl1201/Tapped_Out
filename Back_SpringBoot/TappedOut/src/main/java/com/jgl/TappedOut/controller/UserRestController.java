@@ -405,7 +405,7 @@ public class UserRestController {
      * @throws RuntimeException if user update fails
      */
     @PutMapping({"/{id}", "/{id}/"})
-    @PreAuthorize("@permissionsService.canEditUser(#id)")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Updates a user basic information",
         parameters = {
@@ -460,7 +460,7 @@ public class UserRestController {
      * @throws RuntimeException if user update fails
      */
     @PatchMapping({"/{id}/security", "/{id}/security/"})
-    @PreAuthorize("@permissionsService.canEditUser(#id)")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
         summary = "Updates user authentication information",
         parameters = {
