@@ -13,6 +13,7 @@ import InscriptionsDashboard from "./views/inscription/InscriptionDashboard";
 import InscriptionForm from "./views/inscription/InscriptionForm";
 
 import AdminDashboard from "./views/admin/AdminDashboard";
+import GenderAdminDashboard from "./views/admin/GenderAdminDashboard";
 
 const AppRoutes = () => {
     return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
             <Route path="/inscription" element={<InscriptionsDashboard />} />
 
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/genders" element={<GenderAdminDashboard />} />
 
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
