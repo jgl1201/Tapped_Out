@@ -27,6 +27,17 @@ const SecondaryButton = styled(Button)({
     }
 });
 
+const AdminButton = styled(Button)({
+    background: 'linear-gradient(90deg, #d32f2f, #f44336)',
+    fontWeight: 'bold',
+    color: 'white',
+    padding: '8px 20px',
+    borderRadius: '4px',
+    '&:hover': {
+        background: 'linear-gradient(90deg, #f44336, #d32f2f)',
+    }
+});
+
 const Logo = styled('img')({
     height: '80px',
     width: 'auto',
@@ -48,6 +59,8 @@ const NavLink = styled(Button)({
 const Header = () => {
     const navigate = useNavigate();
     const isAuthenticated = authService.isAuthenticated();
+    const currentUser = isAuthenticated ? authService.getCurrentUser() : null;
+    const isAdmin = authService.isAdmin();
 
     const handleLogout = () => {
         authService.logout();
@@ -86,19 +99,33 @@ const Header = () => {
                     gap: 2,
                     justifyContent: 'center'
                 }}>
-                    <NavLink 
-                        component={RouterLink} 
-                        to="/event"
-                    >
-                        Events
-                    </NavLink>
+                    {isAuthenticated && isAdmin ? (
+                        // Enlaces para administradores
+                        <AdminButton 
+                            component={RouterLink} 
+                            to="/admin"
+                            sx={{ textTransform: 'none' }}
+                        >
+                            Admin Panel
+                        </AdminButton>
+                    ) : (
+                        // Enlaces para usuarios normales
+                        <>
+                            <NavLink 
+                                component={RouterLink} 
+                                to="/event"
+                            >
+                                Events
+                            </NavLink>
 
-                    <NavLink 
-                        component={RouterLink} 
-                        to="/inscription"
-                    >
-                        Inscriptions
-                    </NavLink>
+                            <NavLink 
+                                component={RouterLink} 
+                                to="/inscription"
+                            >
+                                Inscriptions
+                            </NavLink>
+                        </>
+                    )}
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
@@ -121,7 +148,22 @@ const Header = () => {
                         </>
                     ) : (
                         <>
-                            <Typography variant="body1" sx={{ mr: 2 }}>{authService.getCurrentUser().firstName}</Typography>
+                            <Typography variant="body1" sx={{ mr: 2 }}>
+                                {currentUser.firstName}
+                                {isAdmin && (
+                                    <Typography 
+                                        component="span" 
+                                        sx={{ 
+                                            ml: 1, 
+                                            color: '#f44336', 
+                                            fontWeight: 'bold',
+                                            fontSize: '0.8em'
+                                        }}
+                                    >
+                                        (Admin)
+                                    </Typography>
+                                )}
+                            </Typography>
                             <SecondaryButton 
                                 onClick={handleLogout}
                                 sx={{ textTransform: 'none' }}
