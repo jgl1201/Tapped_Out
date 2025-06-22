@@ -355,7 +355,20 @@ const GenderAdminDashboard = () => {
                         Gestión de Géneros
                     </Typography>
                 </TitleContainer>
-                
+            </HeaderContainer>
+
+            <Typography 
+                variant="h6" 
+                sx={{ 
+                    color: '#94a3b8',
+                    textAlign: 'center',
+                    mb: 4
+                }}
+            >
+                Total de géneros registrados: {genders.length}
+            </Typography>
+
+            <Container sx={{ mb: 4, display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                     variant="contained"
                     startIcon={<AddIcon />}
@@ -375,18 +388,7 @@ const GenderAdminDashboard = () => {
                 >
                     Agregar Género
                 </Button>
-            </HeaderContainer>
-
-            <Typography 
-                variant="h6" 
-                sx={{ 
-                    color: '#94a3b8',
-                    textAlign: 'center',
-                    mb: 4
-                }}
-            >
-                Total de géneros registrados: {genders.length}
-            </Typography>
+            </Container>
 
             <StyledTableContainer component={Paper}>
                 <Table>
