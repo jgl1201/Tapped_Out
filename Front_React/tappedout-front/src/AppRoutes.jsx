@@ -9,6 +9,7 @@ import EventDetails from "./views/event/EventDetails";
 import EventModifyForm from "./views/event/EventMoifyForm";
 
 import InscriptionsDashboard from "./views/inscription/InscriptionDashboard";
+import InscriptionForm from "./views/inscription/InscriptionForm";
 
 const AppRoutes = () => {
     return (
@@ -22,6 +23,7 @@ const AppRoutes = () => {
             <Route path="/event/add" element={<CreateEventForm />} />
             <Route path="/event/:id" element={<EventDetails />} />
             <Route path="/event/edit/:id" element={<EventModifyForm />} />
+            <Route path="/event/:id/register" element={<InscriptionForm />} />
 
             <Route path="/inscription" element={<InscriptionsDashboard />} />
 
