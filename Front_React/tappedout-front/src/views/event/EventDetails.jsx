@@ -38,7 +38,7 @@ const EventDetails = () => {
     }, [loadEventDetails]);
 
     const handleRegister = () => {
-        toast.info("Registration functionality coming soon.");
+        navigate(`/event/${id}/register`);
     };
 
     const handleEdit = () => {
