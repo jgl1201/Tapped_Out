@@ -85,7 +85,6 @@ const EventDashboard = () => {
             }}
         >
             <Container maxWidth="xl">
-                {/* Header Section */}
                 <Box sx={{ mb: 4 }}>
                     <Box 
                         sx={{ 
@@ -137,7 +136,6 @@ const EventDashboard = () => {
                     </Typography>
                 </Box>
 
-                {/* Events Grid */}
                 <Box sx={{ backgroundColor: '#161b22', borderRadius: 3, p: 3 }}>
                     {events.length === 0 ? (
                         <Box
@@ -189,7 +187,6 @@ const EventDashboard = () => {
                                         }}
                                     >
                                         <CardContent sx={{ flexGrow: 1, pb: 1 }}>
-                                            {/* Event Name */}
                                             <Typography
                                                 variant="h6"
                                                 sx={{
@@ -208,7 +205,6 @@ const EventDashboard = () => {
                                                 {event.name}
                                             </Typography>
 
-                                            {/* Location */}
                                             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                                                 <LocationIcon sx={{ color: '#bb86fc', mr: 1, fontSize: 20 }} />
                                                 <Typography
@@ -224,7 +220,6 @@ const EventDashboard = () => {
                                                 </Typography>
                                             </Box>
 
-                                            {/* Address (if available) */}
                                             {event.address && (
                                                 <Typography
                                                     variant="body2"
@@ -240,7 +235,6 @@ const EventDashboard = () => {
                                                 </Typography>
                                             )}
 
-                                            {/* Date */}
                                             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                                                 <EventIcon sx={{ color: '#bb86fc', mr: 1, fontSize: 20 }} />
                                                 <Typography
@@ -256,7 +250,6 @@ const EventDashboard = () => {
                                                 </Typography>
                                             </Box>
 
-                                            {/* Sport chip */}
                                             {event.sport && (
                                                 <Box sx={{ mb: 2 }}>
                                                     <Chip
@@ -276,7 +269,6 @@ const EventDashboard = () => {
                                                 </Box>
                                             )}
 
-                                            {/* Registration Fee - Large and prominent */}
                                             <Box sx={{ textAlign: 'center', mb: 2 }}>
                                                 <Typography
                                                     variant="h4"
@@ -296,7 +288,6 @@ const EventDashboard = () => {
                                             </Box>
                                         </CardContent>
 
-                                        {/* Action Button */}
                                         <CardActions sx={{ p: 2, pt: 0 }}>
                                             <Button
                                                 variant="outlined"
